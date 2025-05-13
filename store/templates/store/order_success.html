@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="order-success">
+  <h1>Dziękujemy za zamówienie!</h1>
+  <p>Wkrótce otrzymasz potwierdzenie e-mailem. Jeśli masz pytania, skontaktuj się z nami.</p>
+  <a href="{% url 'product_list' %}" class="btn-buy">Wróć do sklepu</a>
+</section>
+{% endblock %}

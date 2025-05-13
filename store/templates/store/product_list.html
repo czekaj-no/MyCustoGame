@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="product-category">
+  <h2>Nasze gry</h2>
+  <div class="products-grid">
+    {% for product in gry %}
+      <div class="product-card">
+        <img src="{{ product.image.url }}" alt="{{ product.title }}">
+        <h3>{{ product.title }}</h3>
+        <p>{{ product.description|truncatewords:15 }}</p>
+        <a href="{% url 'product_detail' product.slug %}" class="btn-action">Zobacz</a>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="product-category">
+  <h2>Nasze quizy</h2>
+  <div class="products-grid">
+    {% for product in quizy %}
+      <div class="product-card">
+        <img src="{{ product.image.url }}" alt="{{ product.title }}">
+        <h3>{{ product.title }}</h3>
+        <p>{{ product.description|truncatewords:15 }}</p>
+        <a href="{% url 'product_detail' product.slug %}" class="btn-action">Zobacz</a>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="product-category">
+  <h2>Nasze audiobooki</h2>
+  <div class="products-grid">
+    {% for product in audiobooki %}
+      <div class="product-card">
+        <img src="{{ product.image.url }}" alt="{{ product.title }}">
+        <h3>{{ product.title }}</h3>
+        <p>{{ product.description|truncatewords:15 }}</p>
+        <a href="{% url 'product_detail' product.slug %}" class="btn-action">Zobacz</a>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="product-category">
+  <h2>Nasze płyty muzyczne</h2>
+  <div class="products-grid">
+    {% for product in plyty %}
+      <div class="product-card">
+        <img src="{{ product.image.url }}" alt="{{ product.title }}">
+        <h3>{{ product.title }}</h3>
+        <p>{{ product.description|truncatewords:15 }}</p>
+        <a href="{% url 'product_detail' product.slug %}" class="btn-action">Zobacz</a>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

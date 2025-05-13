@@ -1,0 +1,9 @@
+<p>Dziękujemy za zamówienie, {{ order.name }}!</p>
+<p>Twoje zamówienie zostało przyjęte.</p>
+<p><strong>Produkty:</strong></p>
+<ul>
+  {% for item in order.items.all %}
+    <li>{{ item.product.title }} x{{ item.quantity }}</li>
+  {% endfor %}
+</ul>
+<p><strong>Adres dostawy:</strong> {{ order.address }}</p>

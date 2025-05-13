@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Porady - Blog{% endblock %}
+
+{% block content %}
+<section class="blog-list-section">
+   <div class="blog-grid">
+    {% for post in page_obj %}
+        <article class="blog-card">
+         <div class="blog-card-inner">
+
+            <h2 class="blog-card-title">
+                <a href="{% url 'blog_detail' slug=post.slug %}">{{ post.title }}</a>
+            </h2>
+            {% if post.image %}
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="blog-card-image">
+            {% endif %}
+            <p class="blog-card-excerpt">{{ post.content|truncatewords:30 }}</p>
+            <a href="{% url 'blog_detail' slug=post.slug %}" class="blog-card-readmore">Czytaj więcej →</a>
+         </div>
+        </article>
+    {% empty %}
+        <p>Brak wyników wyszukiwania.</p>
+    {% endfor %}
+</div>
+
+
+    <!-- Paginacja -->
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?{% if query %}q={{ query }}&{% endif %}page={{ page_obj.previous_page_number }}">← Poprzednia</a>
+        {% endif %}
+        <span>Strona {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+            <a href="?{% if query %}q={{ query }}&{% endif %}page={{ page_obj.next_page_number }}">Następna →</a>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

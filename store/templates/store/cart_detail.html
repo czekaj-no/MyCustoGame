@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="cart-section">
+  <h1>Twój koszyk</h1>
+
+  {% if cart|length == 0 %}
+    <p>Twój koszyk jest pusty.</p>
+  {% else %}
+    <table>
+      <thead>
+        <tr>
+          <th>Produkt</th>
+          <th>Ilość</th>
+          <th>Cena</th>
+          <th>Suma</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart %}
+        <tr>
+          <td>{{ item.product.title }}</td>
+          <td>
+  <form action="{% url 'update_cart' item.product.slug %}" method="post" class="update-form">
+    {% csrf_token %}
+    <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="qty-input">
+    <button type="submit" class="btn-update">Aktualizuj</button>
+  </form>
+</td>
+          <td>{{ item.price }} zł</td>
+          <td>{{ item.total_price }} zł<br>
+          <a href="{% url 'remove_from_cart' item.product.slug %}" class="remove-btn">Usuń</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% if cart|length > 0 %}
+{% endif %}
+    <p><strong>Łącznie:</strong> {{ cart.get_total_price }} zł</p>
+      <a href="{% url 'checkout' %}" class="btn-buy" style="margin-top: 20px; display: inline-block;">Zamawiam</a>
+
+  {% endif %}
+</section>
+{% endblock %}

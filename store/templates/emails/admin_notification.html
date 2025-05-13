@@ -1,0 +1,11 @@
+<p><strong>Nowe zamówienie od:</strong> {{ order.name }}</p>
+<p>Email: {{ order.email }}<br>
+Telefon: {{ order.phone }}<br>
+Adres: {{ order.address }}</p>
+
+<p><strong>Produkty:</strong></p>
+<ul>
+  {% for item in order.items.all %}
+    <li>{{ item.product.title }} x{{ item.quantity }}</li>
+  {% endfor %}
+</ul>

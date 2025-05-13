@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}MyCustoGame{% endblock %}</title>
+
+    <!-- Ładowanie pliku CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+
+</head>
+<body>
+  <div class="page-container">
+
+
+    <header class = "main-header">
+        <div class="logo">
+            <a href="/"><img src="{% static 'img/my_custogame_logo.png' %}" alt="Logo MyCustoGame" /></a>
+        </div>
+        <nav class="menu">
+            <ul>
+                <li><a href="/sklep/">Nasze Gry</a></li>
+                <li><a href="/personalizuj-gre/">Personalizuj Grę</a></li>
+                <li><a href="/moje-konto/">Moje Konto</a></li>
+                <li><a href="{% url 'blog_list' %}">Blog</a></li>
+                <li><a href="/dla-firm/">Dla Firm</a></li>
+                <li><a href="/kontakt/">Kontakt</a></li>
+                <li><a href="zagraj-w-nasza-gre" class="cta-button">ZAGRAJ W NASZĄ GRĘ</a></li>
+
+            </ul>
+        </nav>
+        <!-- Hamburger menu -->
+<div class="hamburger" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+    </header>
+  <main>
+
+        {% block content %}
+        {% endblock %}
+    </main>
+  </div>
+<footer>
+
+     <div class="footer-inner">
+    <div class="footer-columns">
+        <div class="footer-col">
+            <h4>MY CUSTOGAME </h4>
+
+
+ <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
+ <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
+             <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
+
+            <img src="{% static 'img/mycustogame_logo_footer.png' %}" alt="Logo MyCustoGame Footer" class="footer-logo">
+
+
+
+        </div>
+
+        <div class="footer-col">
+            <h4>KONTAKT</h4>
+    <p><i class="fas fa-map-marker-alt"></i> Address:<br> Street Name, FL 54785</p>
+    <p><i class="fas fa-phone-alt"></i> Phone:<br> 621-254-2147</p>
+    <p><i class="fas fa-envelope"></i> Email:<br> contact@support.com</p>
+
+
+
+
+          <div class="social-icons circle-icons">
+
+
+    <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://youtube.com" target="_blank" aria-label="YouTube">
+        <i class="fab fa-youtube"></i>
+    </a>
+    <a href="https://tiktok.com" target="_blank" aria-label="TikTok">
+        <i class="fab fa-tiktok"></i>
+    </a>
+</div>
+
+        </div>
+
+        <div class="footer-col">
+            <h4>DANE FIRMY</h4>
+         <p>MyCustoGame Sp. z o. o.</p>
+         <p>NIP: 2398643</p>
+         <p>REGON: 986750</p>
+         <p>KRS: 986750</p>
+        <p>Nr konta: 2343 4565 2395 3475 1232 1233</p>
+        </div>
+
+        <div class="footer-col">
+            <h4>MENU</h4>
+            <ul>
+
+                <li><a href="/nasze-gry/">Nasze Gry</a></li>
+                <li><a href="/personalizuj-gre/">Personalizuj Grę</a></li>
+                <li><a href="moje-konto">Moje Konto</a></li>
+                <li><a href="{% url 'blog_list' %}">Blog</a></li>
+                <li><a href="/dla-firm/">Dla Firm</a></li>
+                <li><a href="zagraj-w-nasza-gre"><u>ZAGRAJ W NASZĄ GRĘ</u></a></li>
+
+            </ul>
+        </div>
+
+    </div>
+     </div>
+
+   <div class="footer-bottom">
+    <div class="footer-bottom-links">
+        <a href="/polityka-prywatnosci/">Polityka Prywatności</a> |
+        <a href="/regulamin/">Regulamin</a>
+    </div>
+    <p>© 2025 MyCustoGame. Wszystkie prawa zastrzeżone.</p>
+</div>
+    </footer>
+
+    <!-- Ładowanie pliku JS -->
+    <script src="{% static 'js/main.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+</body>
+</html>

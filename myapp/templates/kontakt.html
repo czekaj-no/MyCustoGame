@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Kontakt
+{% endblock %}
+
+{% block content %}
+<section class="contact-wrapper">
+    <div class="contact-info">
+        <div class="contact-box">
+            <h2>Dane kontaktowe</h2>
+            <p><i class="fas fa-clock"></i> 9:00 - 17:00<br>pn - pt</p>
+            <p><i class="fas fa-phone"></i> +48 111 222 333</p>
+            <p><i class="fas fa-phone"></i> +48 111 222 333</p>
+            <p><i class="fas fa-envelope"></i> info@mycustogame.com</p>
+            <p><i class="fas fa-envelope"></i> wspolpraca@mycustogame.com</p>
+        </div>
+
+        <div class="company-box">
+            <h2>Informacje o firmie</h2>
+            <p><i class="fas fa-location-dot"></i> MyCustoGame Sp. z o.o.<br>Street Name 123,<br>98-324 Blablabla</p>
+            <p><i class="fas fa-circle-info"></i> NIP: 2398643<br>REGON: 986750<br>KRS: 345782</p>
+            <p><i class="fas fa-money-bill"></i> Nr konta: 2343 4565 2395 3475 1232 123</p>
+        </div>
+    </div>
+
+</section>
+    <h2>Wyślij zapytanie</h2>
+
+<section class="form-section">
+  <form>
+    <label for="name">Imię i nazwisko *</label>
+    <input type="text" id="name" required>
+
+    <label for="email">Email *</label>
+    <input type="email" id="email" required>
+
+    <label for="message">Wiadomość *</label>
+    <textarea id="message" required></textarea>
+
+    <button type="submit">Wyślij</button>
+  </form>
+</section>
+
+<section class="carousel-section">
+  <h2>Nasz zespół i nasze biuro</h2>
+    <div class="carousel-text-wrapper">
+  <p>To tutaj mieści się nasze biuro – miejsce, gdzie planujemy, współpracujemy i realizujemy nasze projekty. Każdy z nas pracuje częściowo zdalnie, dlatego na co dzień biuro nie jest otwarte dla klientów.</p>
+  <p>Rozumiemy jednak, że niektóre projekty wymagają osobistego spotkania i dokładnego omówienia szczegółów.</p>
+  <p><strong>Jeśli chcesz się z nami spotkać, skontaktuj się – umówimy termin i zaprosimy Cię do biura.</strong></p>
+    </div>
+
+  <div class="carousel-container">
+    <div class="carousel-wrapper-with-arrows">
+      <button class="carousel-btn carousel-prev"><i class="fas fa-chevron-left"></i></button>
+
+      <div class="carousel-track-wrapper">
+        <div class="carousel-track">
+          <div class="carousel-item">
+            <img src="{% static 'img/person-1.jpg' %}" alt="Jan Kowalski">
+              <h3>Jan Kowalski</h3>
+              <p>Panie Janie, Panie Janie czym Pan się zajmuje?</p>
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'img/person-2.jpg' %}" alt="Magdalena Madziowa">
+              <h3>Magdalena Madziowa</h3>
+            <p>Coś o tej Madzi, co mi dziś ta Pani doradzi?</p>
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'img/person-3.jpg' %}" alt="Dżesika Dżejson">
+              <h3>Dżesika Dżejson</h3>
+            <p>Krótki opis Dżesiki - ulubiony skrót Dżesiki? JSON!</p>
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'img/person-4.jpg' %}" alt="Alex Ostatni">
+              <h3>Alex Ostatni</h3>
+            <p>The last but not least</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="carousel-btn carousel-next"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+</section>
+
+
+<section class="map-section">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d748388.1988732693!2d18.935422115851328!3d51.96551410061427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471a4997ca992f11%3A0x3c8f4ff7c8e97f76!2s95-200%20Kudrowice!5e0!3m2!1spl!2spl!4v1746886020479!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+{% endblock %}

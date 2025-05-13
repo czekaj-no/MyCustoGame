@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="checkout-section">
+  <h1>Zamówienie</h1>
+
+  {% if error %}
+    <p style="color: red;">{{ error }}</p>
+  {% endif %}
+
+  <form method="post" class="checkout-form">
+    {% csrf_token %}
+
+    <label for="name">Imię i nazwisko</label>
+    <input type="text" name="name" required placeholder="Jan Kowalski">
+
+    <label for="email">Email</label>
+    <input type="email" name="email" required placeholder="jan@example.com">
+
+    <label for="phone">Numer telefonu</label>
+    <input type="text" name="phone" required placeholder="123 456 789">
+
+    <label for="address">Adres</label>
+    <input type="text" name="address" required placeholder="ul. Przykładowa 1, 00-000 Miasto">
+
+    <button type="submit" class="btn-buy">Złóż zamówienie</button>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,125 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Nasze gry
+{% endblock %}
+
+{% block content %}
+
+<section class="product-category">
+  <h1>Nasze gry</h1>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <img src="{% static 'img/cd.png' %}" alt="Gra onboardingowa">
+      <h2>Gra onboardingowa</h2>
+      <p>Wprowadź pracownika do świata Twojej firmy w formie gry.</p>
+      <a href="/zagraj/onboarding/" class="btn-action">Zagraj</a>
+    </div>
+
+    <div class="product-card">
+      <img src="{% static 'img/cd.png' %}" alt="Gra integracyjna">
+      <h2>Gra integracyjna</h2>
+      <p>Połącz zespół przez zabawę – online lub offline.</p>
+      <a href="/zagraj/integracja/" class="btn-action">Zagraj</a>
+    </div>
+
+    <div class="product-card">
+      <img src="{% static 'img/cd.png' %}" alt="Gra wprowadzająca produkt">
+      <h2>Gra o produkcie</h2>
+      <p>Przedstaw nowy produkt lub usługę w nietypowy sposób.</p>
+      <a href="/zagraj/produkt/" class="btn-action">Zagraj</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="product-category">
+  <h1>Nasze quizy</h1>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <img src="{% static 'img/cd.png' %}" alt="Quiz wiedzy">
+      <h2>Quiz wiedzy o firmie</h2>
+      <p>Sprawdź, ile Twoi pracownicy pamiętają z onboardingu.</p>
+      <a href="/quiz/firmowy/" class="btn-action">Rozwiąż</a>
+    </div>
+
+    <div class="product-card">
+      <img src="{% static 'img/cd.png' %}" alt="Quiz produktowy">
+      <h2>Quiz produktowy</h2>
+      <p>Test wiedzy o ofercie i funkcjach produktów.</p>
+      <a href="/quiz/produkt/" class="btn-action">Rozwiąż</a>
+    </div>
+
+    <div class="product-card">
+      <img src="{% static 'img/cd.png' %}" alt="Quiz integracyjny">
+      <h2>Quiz integracyjny</h2>
+      <p>Zabawne pytania o zespole, idealne na początek spotkania.</p>
+      <a href="/quiz/integracja/" class="btn-action">Rozwiąż</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="product-category">
+  <h1>Nasze audiobooki</h1>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <img src="{% static 'img/cd.png' %}" alt="Audiobook 1">
+      <h2>Opowieść o firmie</h2>
+      <p>Storytelling o misji i historii marki – do słuchania.</p>
+      <a href="/sluchaj/opowiesc/" class="btn-action">Posłuchaj</a>
+    </div>
+
+    <div class="product-card">
+      <img src="{% static 'img/cd.png' %}" alt="Audiobook 2">
+      <h2>Głos CEO</h2>
+      <p>Przemówienie powitalne lub noworoczne jako audiobook.</p>
+      <a href="/sluchaj/ceo/" class="btn-action">Posłuchaj</a>
+    </div>
+
+    <div class="product-card">
+      <img src="{% static 'img/cd.png' %}" alt="Audiobook 3">
+      <h2>Firmowe FAQ audio</h2>
+      <p>Odpowiedzi na najczęstsze pytania – nagrane i dostępne zawsze.</p>
+      <a href="/sluchaj/faq/" class="btn-action">Posłuchaj</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="product-category">
+  <h1>Nasze płyty muzyczne</h1>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <img src="{% static 'img/cd.png' %}" alt="Płyta 1">
+      <h2>Motywacyjna playlista</h2>
+      <p>Muzyka do pracy i rozwoju – energetyczna i nowoczesna.</p>
+      <a href="/sluchaj/motywacja/" class="btn-action">Odtwórz</a>
+    </div>
+
+    <div class="product-card">
+      <img src="{% static 'img/cd.png' %}" alt="Płyta 2">
+      <h2>Muzyka do relaksu</h2>
+      <p>Stonowane dźwięki do regeneracji i koncentracji.</p>
+      <a href="/sluchaj/relaks/" class="btn-action">Odtwórz</a>
+    </div>
+
+    <div class="product-card">
+      <img src="{% static 'img/cd.png' %}" alt="Płyta 3">
+      <h2>Personalizowana ścieżka dźwiękowa</h2>
+      <p>Twoja marka w formie muzycznej – idealna na eventy i filmy.</p>
+      <a href="/sluchaj/brand-audio/" class="btn-action">Odtwórz</a>
+    </div>
+
+  </div>
+</section>
+
+
+{% endblock %}
+
