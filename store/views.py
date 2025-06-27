@@ -24,7 +24,11 @@ def product_list(request):
 
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug)
-    return render(request, 'store/product_detail.html', {'product': product})
+    similar_products = Product.objects.exclude(id=product.id)[:3]
+    return render(request, 'store/product_detail.html', {
+        'product': product,
+        'similar_products': similar_products
+})
 
 def add_to_cart(request, slug):
     product = get_object_or_404(Product, slug=slug)
@@ -117,3 +121,14 @@ def checkout(request):
 
 def order_success(request):
     return render(request, 'store/order_success.html')
+
+def playable_products(request):
+    gry = Product.objects.filter(category="gra", downloadable_file__isnull=False)
+    quizy = Product.objects.filter(category="quiz", downloadable_file__isnull=False)
+    audio = Product.objects.filter(category__in=["audiobook", "plyta"], downloadable_file__isnull=False)
+
+    return render(request, 'store/playable_products.html', {
+        'gry': gry,
+        'quizy': quizy,
+        'audio': audio,
+    })

@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('zagraj/', views.playable_products, name='playable_products'),
     path('', views.product_list, name='product_list'),
     path('koszyk/', views.cart_detail, name='cart_detail'),
     path('zamowienie/', views.checkout, name='checkout'),
@@ -11,9 +12,6 @@ urlpatterns = [
     path('usun-z-koszyka/<slug:slug>/', views.remove_from_cart, name='remove_from_cart'),
     path('aktualizuj-koszyk/<slug:slug>/', views.update_cart, name='update_cart'),
     path('zamowienie/', views.checkout, name='checkout'),
-
-
-
 ]
 
 

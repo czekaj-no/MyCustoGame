@@ -2,7 +2,10 @@ from django.contrib import admin
 from .models import Product, Order, OrderItem
 
 # Rejestracja prostych modeli
-admin.site.register(Product)
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ['title', 'category', 'price']  # możesz dodać więcej, jeśli chcesz
+
 admin.site.register(OrderItem)  # OrderItem sam w sobie
 
 # Konfiguracja Order z dekoratorem
@@ -17,3 +20,4 @@ class OrderAdmin(admin.ModelAdmin):
     search_fields = ['name', 'email']
     inlines = [OrderItemInline]
     list_editable = ['status', 'is_paid']
+

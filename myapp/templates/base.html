@@ -19,7 +19,7 @@
 
     <header class = "main-header">
         <div class="logo">
-            <a href="/"><img src="{% static 'img/my_custogame_logo.png' %}" alt="Logo MyCustoGame" /></a>
+            <a href="/"><img src="{% static 'img/my_custo_gift_logo.png' %}" alt="Logo MyCustoGift" /></a>
         </div>
         <nav class="menu">
             <ul>
@@ -29,7 +29,7 @@
                 <li><a href="{% url 'blog_list' %}">Blog</a></li>
                 <li><a href="/dla-firm/">Dla Firm</a></li>
                 <li><a href="/kontakt/">Kontakt</a></li>
-                <li><a href="zagraj-w-nasza-gre" class="cta-button">ZAGRAJ W NASZĄ GRĘ</a></li>
+                <li><a href="/sklep/zagraj/" class="cta-button">ZAGRAJ W NASZĄ GRĘ</a></li>
 
             </ul>
         </nav>
@@ -52,14 +52,12 @@
      <div class="footer-inner">
     <div class="footer-columns">
         <div class="footer-col">
-            <h4>MY CUSTOGAME </h4>
+            <h4>MyCustoGift </h4>
 
 
- <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
- <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-             <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-
-            <img src="{% static 'img/mycustogame_logo_footer.png' %}" alt="Logo MyCustoGame Footer" class="footer-logo">
+ <p>Tworzymy wyjątkowe, personalizowane prezenty: gry, quizy, bajki, nagrania i opowieści.</p>
+ <p>Każdy z nich powstaje na zamówienie – z myślą o konkretnej osobie i emocjach, które chcesz jej podarować.</p>
+            <img src="{% static 'img/my_custo_gift_logo_footer.png' %}" alt="Logo MyCustoGame Footer" class="footer-logo">
 
 
 
@@ -67,9 +65,8 @@
 
         <div class="footer-col">
             <h4>KONTAKT</h4>
-    <p><i class="fas fa-map-marker-alt"></i> Address:<br> Street Name, FL 54785</p>
-    <p><i class="fas fa-phone-alt"></i> Phone:<br> 621-254-2147</p>
-    <p><i class="fas fa-envelope"></i> Email:<br> contact@support.com</p>
+    <p><i class="fas fa-phone-alt"></i> Telefon:<br> +48 792 625 185 <br>+48 530 136 145</p>
+    <p><i class="fas fa-envelope"></i> Email:<br> info@mycustogift.com </p>
 
 
 
@@ -95,11 +92,10 @@
 
         <div class="footer-col">
             <h4>DANE FIRMY</h4>
-         <p>MyCustoGame Sp. z o. o.</p>
-         <p>NIP: 2398643</p>
-         <p>REGON: 986750</p>
-         <p>KRS: 986750</p>
-        <p>Nr konta: 2343 4565 2395 3475 1232 1233</p>
+         <p>Nazwa: <br>ZACNI Magdalena Kwiatkowska</p>
+         <p>NIP: 8883030362</p>
+         <p>REGON: 528028930</p>
+        <p>Nr konta:<br> 46105014611000009083479320</p>
         </div>
 
         <div class="footer-col">
@@ -111,7 +107,7 @@
                 <li><a href="moje-konto">Moje Konto</a></li>
                 <li><a href="{% url 'blog_list' %}">Blog</a></li>
                 <li><a href="/dla-firm/">Dla Firm</a></li>
-                <li><a href="zagraj-w-nasza-gre"><u>ZAGRAJ W NASZĄ GRĘ</u></a></li>
+                <li><a href="/sklep/zagraj/"><u>ZAGRAJ W NASZĄ GRĘ</u></a></li>
 
             </ul>
         </div>
@@ -124,11 +120,13 @@
         <a href="/polityka-prywatnosci/">Polityka Prywatności</a> |
         <a href="/regulamin/">Regulamin</a>
     </div>
-    <p>© 2025 MyCustoGame. Wszystkie prawa zastrzeżone.</p>
+    <p>© 2025 MyCustoGift. Wszystkie prawa zastrzeżone.</p>
 </div>
     </footer>
 
     <!-- Ładowanie pliku JS -->
+  {% load static %}
+
     <script src="{% static 'js/main.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 

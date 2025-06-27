@@ -11,24 +11,53 @@
 
     <div class="product-info">
       <h1>{{ product.title }}</h1>
-      <p class="product-description">{{ product.description }}</p>
+      <p class="product-description">{{ product.short_description }}</p>
       <p class="product-price">{{ product.price }} zł</p>
 
     <a href="{% url 'add_to_cart' product.slug %}" class="btn-buy">Dodaj do koszyka</a>
 
+   {% if product.category == "gra" and product.downloadable_file %}
+  <a href="{{ product.downloadable_file.url }}" class="cta-button dark" download>Pobierz i zagraj</a>
+
+{% elif product.category == "quiz" and product.downloadable_file %}
+  <a href="{{ product.downloadable_file.url }}" class="cta-button dark" download>Pobierz i sprawdź się</a>
+
+{% elif product.category == "audiobook" or product.category == "plyta" %}
+  {% if product.downloadable_file %}
+    <button class="cta-button dark" onclick="togglePlayer()">🎧 Przesłuchaj fragment</button>
+    <div id="audio-player" style="display:none; margin-top: 20px;">
+      <audio controls style="width: 100%; max-width: 400px;">
+        <source src="{{ product.downloadable_file.url }}" type="audio/mpeg">
+        Twoja przeglądarka nie obsługuje odtwarzacza audio.
+      </audio>
+    </div>
+  {% else %}
+    <p>Fragment audio będzie wkrótce dostępny.</p>
+  {% endif %}
+{% endif %}
+
+
+
     </div>
 
   </div>
+  <div class="product-description">
+    {{ product.description|linebreaks }}
+  </div>
+</div>
 </section>
 
 <section class="related-products">
   <h2>Może Ci się też spodobać</h2>
   <div class="products-grid">
-    {% for item in related_products %}
+    {% for item in similar_products %}
       <div class="product-card">
         <img src="{{ item.image.url }}" alt="{{ item.title }}">
         <h3>{{ item.title }}</h3>
         <p>{{ item.price }} zł</p>
+        {% if product.short_description %}
+  <p class="product-short">{{ product.short_description }}</p>
+{% endif %}
         <a href="{% url 'product_detail' item.slug %}" class="btn-action">Zobacz</a>
       </div>
     {% endfor %}

@@ -14,6 +14,7 @@ class Product(models.Model):
     promo_price = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
     image = models.ImageField(upload_to='products/')
     tags = TaggableManager()
+    downloadable_file = models.FileField(upload_to='downloads/', blank=True, null=True)
     CATEGORY_CHOICES = [
         ('gra', 'Gra'),
         ('quiz', 'Quiz'),
@@ -23,6 +24,7 @@ class Product(models.Model):
 
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='gra')
 
+
     def __str__(self):
         return self.title
 
@@ -30,6 +32,13 @@ class Product(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
+    images = models.ImageField(upload_to='products/gallery')
+
+    def __str__(self):
+        return f"{self.product.name} - image"
 
 class Order(models.Model):
     STATUS_CHOICES = [
@@ -47,6 +56,7 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     is_paid = models.BooleanField(default=False)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='nowe')
+
 
     def __str__(self):
         return f"Zamówienie #{self.id} - {self.name}"

@@ -1,0 +1,94 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Spotkanie dla Firm
+{% endblock %}
+
+{% block content %}
+<section class="calendar-section">
+  <h2>Umów się na spotkanie dla Firm</h2>
+
+  <div class="calendar-controls">
+    <button id="prev-month" class="calendar-btn">←</button>
+    <div id="month-year"></div>
+    <button id="next-month" class="calendar-btn">→</button>
+  </div>
+
+  <div id="calendar" class="calendar-grid"></div>
+
+  <div id="time-slots" style="display: none;">
+    <h3>Wybierz godzinę:</h3>
+    <div id="slots"></div>
+  </div>
+
+
+<section id="signup-form" style="display: none;">
+  <h2>Umów się na spotkanie</h2>
+  <form method="POST">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label for="owner-name">Imię i nazwisko</label>
+      <input type="text" id="owner-name" name="owner_name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Numer telefonu</label>
+      <input type="tel" id="phone" name="phone" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Adres e-mail</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="dog-name">Imię pieska</label>
+      <input type="text" id="dog-name" name="dog_name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="dog-age">Wiek pieska</label>
+      <input type="text" id="dog-age" name="dog_age" required>
+    </div>
+
+    <div class="form-group">
+      <label for="dog-breed">Rasa pieska/ W typie rasy / Kundelek</label>
+      <input type="text" id="dog-breed" name="dog_breed" required>
+    </div>
+
+    <div class="form-group">
+      <label for="problem">Opisz problem</label>
+      <textarea id="problem" name="problem" rows="5" required></textarea>
+    </div>
+
+    <button type="submit" class="cta-button">Umów spotkanie</button>
+  </form>
+</section>
+
+
+<section class="results-section">
+  <div class="results-wrapper">
+    <h2 class="results-heading">
+Podczas 15-30 minut spotkania omówimy:    </h2>
+    <div class="benefits-columns">
+      <div class="benefit-column">
+        <ul>
+          <li><span class="check">✔</span> Twoje cele i potrzeby — co chcesz osiągnąć dzięki interaktywnemu prezentowi</li>
+          <li><span class="check">✔</span> Możliwe formaty: gra, quiz, audiobook, zaproszenie — dobierzemy najlepszy</li>
+          <li><span class="check">✔</span> Sposoby personalizacji pod kątem marki, odbiorcy i okazji</li>
+          <li><span class="check">✔</span> Pomysły na fabułę, humor lub emocje — żeby prezent był niezapomniany</li>
+          <li><span class="check">✔</span> Możliwości dostarczenia: link, QR, CD, DVD, pendrive, opakowanie premium</li>
+          <li><span class="check">✔</span> Pytania i odpowiedzi — rozwiejemy wszystkie Twoje wątpliwości</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+{% endblock %}
+

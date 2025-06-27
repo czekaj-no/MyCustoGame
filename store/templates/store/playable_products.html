@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+{% if gry %}
+<section class="product-category section-light">
+  <h2 class="section-title">🎮 Przetestuj gry </h2>
+  <p class="section-subtitle">
+    Stwórz prezent, który zaskoczy – nasze gry to nie tylko zabawa, ale osobista historia.
+    Zobacz, jak może wyglądać Twoja gra!
+  </p>
+  <div class="products-grid">
+    {% for product in gry %}
+      <div class="product-card">
+        <img src="{{ product.image.url }}" alt="{{ product.title }}">
+        <h3>{{ product.title }}</h3>
+        <p>{{ product.price }} zł</p>
+        <p>{{ product.short_description }}</p>
+        <a href="{% url 'product_detail' product.slug %}" class="btn-action">Pobierz i zagraj</a>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if quizy %}
+<section class="product-category section-white">
+  <h2 class="section-title">🧠 Przetestuj quizy</h2>
+  <p class="section-subtitle">
+    Quiz jako prezent? Dlaczego nie! Wciągająca zabawa, która pozwala lepiej się poznać.
+  </p>
+  <div class="products-grid">
+    {% for product in quizy %}
+      <div class="product-card">
+        <img src="{{ product.image.url }}" alt="{{ product.title }}">
+        <h3>{{ product.title }}</h3>
+        <p>{{ product.price }} zł</p>
+        <p>{{ product.short_description }}</p>
+        <a href="{% url 'product_detail' product.slug %}" class="btn-action">Sprawdź się</a>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if audio %}
+<section class="product-category section-light">
+  <h2 class="section-title">🎧 Przetestuj audiobooki i płyty</h2>
+  <p class="section-subtitle">
+    Posłuchaj fragmentów spersonalizowanych nagrań – idealnych jako prezent od serca.
+  </p>
+  <div class="products-grid">
+    {% for product in audio %}
+      <div class="product-card">
+        <img src="{{ product.image.url }}" alt="{{ product.title }}">
+        <h3>{{ product.title }}</h3>
+        <p>{{ product.price }} zł</p>
+        <p>{{ product.short_description }}</p>
+        <a href="{% url 'product_detail' product.slug %}" class="btn-action">Przesłuchaj fragment</a>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}

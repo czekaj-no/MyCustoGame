@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from .forms import ContactForm
 
+
 def home(request):
     return render(request, 'home.html')
 
@@ -21,6 +22,8 @@ def b2b (request):
 def galeria (request):
     return render (request, 'galeria.html')
 
+def b2b_meeting (request):
+    return render (request, 'b2b_meeting.html')
 
 from django.core.mail import send_mail
 from django.shortcuts import render
@@ -44,3 +47,6 @@ def kontakt(request):
         )
 
     return render(request, "kontakt.html")
+
+
+
