@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Moje Konto
+{% endblock %}
+
+{% block content %}
+
+<div class="account-wrapper">
+  <aside class="account-sidebar">
+    <ul>
+      <li>
+        <a href="{% url 'my_data' %}"
+           class="{% if request.resolver_match.url_name == 'my_data' %}active-link{% endif %}">
+           👤 Moje dane
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'my_orders' %}"
+           class="{% if request.resolver_match.url_name == 'my_orders' %}active-link{% endif %}">
+           📦 Moje zamówienia
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'customize' %}"
+           class="{% if request.resolver_match.url_name == 'customize' %}active-link{% endif %}">
+           📝 Personalizacja
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'downloads' %}"
+           class="{% if request.resolver_match.url_name == 'downloads' %}active-link{% endif %}">
+           ⬇️ Pliki
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'qr_codes' %}"
+           class="{% if request.resolver_match.url_name == 'qr_codes' %}active-link{% endif %}">
+           📲 Kod QR
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'offers' %}"
+           class="{% if request.resolver_match.url_name == 'offers' %}active-link{% endif %}">
+           💝 Oferty
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+  <section class="account-content">
+    {% block account_content %}
+    <!-- każda zakładka tutaj wstawia swoją zawartość -->
+    {% endblock %}
+  </section>
+</div>
+
+{% endblock %}

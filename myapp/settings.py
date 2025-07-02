@@ -157,3 +157,6 @@ ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+LOGIN_REDIRECT_URL = '/konto/zamowienia/'
+
+

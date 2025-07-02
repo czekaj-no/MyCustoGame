@@ -1,0 +1,28 @@
+{% extends 'store/account_base.html' %}
+{% block account_content %}
+<h2>💝 Oferty specjalne</h2>
+
+<div class="offers-grid">
+
+  {# Pakiet – blokowany do pierwszego zrealizowanego zamówienia #}
+  <div class="offer-card {% if not has_realized_order %}locked{% endif %}">
+    <h3>🎁 Zestaw: Kartka + Płyta + Pendrive</h3>
+    <p>Otrzymaj 20% zniżki przy kolejnym zakupie, gdy wybierzesz wszystkie 3 dodatki.</p>
+    {% if has_realized_order %}
+      <a href="/sklep/" class="cta-button small">Skorzystaj z pakietu</a>
+    {% else %}
+      <p class="info-text red">Pakiet dostępny po realizacji pierwszego zamówienia</p>
+    {% endif %}
+  </div>
+
+  {# Oferta czasowa – tylko jeśli jeszcze ważna #}
+  {% if show_pendrive_offer %}
+  <div class="offer-card">
+    <h3>🔑 Pendrive GRATIS!</h3>
+    <p>Zamów prezent do <strong>{{ pendrive_deadline }}</strong>, a pendrive z grawerem dodamy gratis 🎉</p>
+    <a href="/sklep/" class="cta-button small">Zamów z gratisem</a>
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

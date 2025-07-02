@@ -36,6 +36,57 @@
   {% endif %}
 {% endif %}
 
+<div class="product-options">
+  <p><strong>W cenie otrzymujesz:</strong></p>
+  <ul class="included-options">
+    <li>✅ Plik cyfrowy do pobrania</li>
+    <li>✅ Generator kodu QR</li>
+  </ul>
+
+<p><strong>Opcje dodatkowe:</strong></p>
+<ul class="extra-options">
+  <li>
+    <label>
+      <input type="checkbox" onchange="toggleQuantity(this, 'card')">
+      Kartka A4 z życzeniami i kodem QR (+29zł)
+    </label>
+    <div class="quantity-box" id="quantity-card">
+      <label>Ilość:</label>
+      <input type="number" min="1" value="1">
+      <p class="quantity-info">Każda kolejna kartka 30% taniej!</p>
+    </div>
+  </li>
+  <li>
+    <label>
+      <input type="checkbox" onchange="toggleQuantity(this, 'cd')">
+      Płyta z nadrukiem + opakowanie (+49zł)
+    </label>
+    <div class="quantity-box" id="quantity-cd">
+      <label>Ilość:</label>
+      <input type="number" min="1" value="1">
+      <p class="quantity-info">Każda kolejna płyta 30% taniej!</p>
+    </div>
+  </li>
+  <li>
+    <label>
+      <input type="checkbox" onchange="toggleQuantity(this, 'usb')">
+      Pendrive z grawerem + opakowanie (+69zł)
+    </label>
+    <div class="quantity-box" id="quantity-usb">
+      <label>Ilość:</label>
+      <input type="number" min="1" value="1">
+      <p class="quantity-info">Każdy kolejny pendrive 30% taniej!</p>
+    </div>
+  </li>
+</ul>
+
+
+  <div class="form-preview-link">
+    <a href="#personalizacja-podglad" class="cta-button small dark">Zobacz, co możesz spersonalizować</a>
+  </div>
+</div>
+
+
 
 
     </div>
@@ -43,6 +94,28 @@
   </div>
   <div class="product-description">
     {{ product.description|linebreaks }}
+    {% if product.custom_form %}
+<div id="personalizacja-podglad" class="form-preview-wrapper">
+  <h3>🔧 Podgląd personalizacji</h3>
+  <p class="form-preview-note">Tak wygląda formularz do personalizacji, który wypełniasz po zakupie.</p>
+
+  <form class="form-preview-box">
+    {% for field in product.custom_form.fields.all %}
+      <div class="form-preview-field">
+        <label>{{ field.label }}</label>
+        {% if field.field_type == 'text' %}
+          <input type="text" disabled placeholder="pole tekstowe">
+        {% elif field.field_type == 'textarea' %}
+          <textarea disabled rows="2" placeholder="pole wielowierszowe"></textarea>
+        {% elif field.field_type == 'file' %}
+          <input type="file" disabled>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </form>
+</div>
+{% endif %}
+
   </div>
 </div>
 </section>

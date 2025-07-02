@@ -1,0 +1,110 @@
+{% extends "store/account_base.html" %}
+{% block account_content %}
+
+<h2>Moje dane</h2>
+
+{% if show_address_alert %}
+  <div class="alert alert-warning">
+    ⚠️ Uzupełnij swój adres, abyśmy mogli wysłać Twój zamówiony produkt.
+  </div>
+{% endif %}
+
+<form method="post">
+  {% csrf_token %}
+
+  <!-- 🔹 Dane użytkownika -->
+  <fieldset class="user-section">
+    <legend>Dane użytkownika</legend>
+
+    <label>Imię:</label>
+    <input type="text" name="first_name" value="{{ user.first_name }}">
+
+    <label>Nazwisko:</label>
+    <input type="text" name="last_name" value="{{ user.last_name }}">
+
+    <label>Email:</label>
+    <input type="email" name="email" value="{{ user.email }}">
+
+    <label>Telefon:</label>
+    <input type="text" name="phone" value="{{ profile.phone }}">
+  </fieldset>
+
+  <!-- 🔹 Adres wysyłki -->
+  <fieldset class="user-section">
+    <legend>Adres wysyłki</legend>
+
+    <label>Ulica i numer:</label>
+    <input type="text" name="shipping_street" value="{{ profile.shipping_street }}">
+
+    <label>Kod pocztowy:</label>
+    <input type="text" name="shipping_postcode" value="{{ profile.shipping_postcode }}">
+
+    <label>Miasto:</label>
+    <input type="text" name="shipping_city" value="{{ profile.shipping_city }}">
+
+    <label>Kraj:</label>
+    <select name="shipping_country">
+      <option value="Polska" {% if profile.shipping_country == "Polska" %}selected{% endif %}>Polska</option>
+      <option value="Inny">Inny</option>
+    </select>
+  </fieldset>
+
+<fieldset class="user-section">
+  <legend>Dane do rachunku / faktury</legend>
+
+  <!-- Wybór rachunku lub faktury -->
+  <div class="radio-inline">
+    <label><input type="radio" name="invoice_type" value="rachunek" checked onchange="toggleInvoiceType()"> Wybieram rachunek</label>
+  </div>
+  <div class="radio-inline">
+    <label><input type="radio" name="invoice_type" value="faktura" onchange="toggleInvoiceType()"> Wybieram fakturę</label>
+  </div>
+
+  <!-- Checkbox: adres i dane takie same jak do wysyłki -->
+  <div class="checkbox-inline" style="margin-top: 15px;">
+    <input type="checkbox" name="same_as_shipping" id="same_as_shipping" checked onchange="toggleInvoiceAddress()">
+    <label for="same_as_shipping">Dane rachunku/faktury takie same jak do wysyłki</label>
+  </div>
+
+  <!-- NIP – tylko dla faktury -->
+  <div id="nip_field" class="field-group hidden">
+    <label for="invoice_nip">NIP:</label>
+    <input type="text" name="invoice_nip" id="invoice_nip" value="{{ profile.invoice_nip }}">
+  </div>
+
+  <!-- Dodatkowe dane, jeśli adres nie jest taki sam -->
+  <div id="invoice_address" class="invoice-fields hidden">
+    <div class="field-group">
+      <label for="invoice_name">Imię i nazwisko / Nazwa firmy:</label>
+      <input type="text" name="invoice_name" id="invoice_name" value="{{ profile.invoice_name }}">
+    </div>
+    <div class="field-group">
+      <label for="invoice_street">Ulica i numer:</label>
+      <input type="text" name="invoice_street" id="invoice_street" value="{{ profile.invoice_street }}">
+    </div>
+    <div class="field-group">
+      <label for="invoice_postcode">Kod pocztowy:</label>
+      <input type="text" name="invoice_postcode" id="invoice_postcode" value="{{ profile.invoice_postcode }}">
+    </div>
+    <div class="field-group">
+      <label for="invoice_city">Miasto:</label>
+      <input type="text" name="invoice_city" id="invoice_city" value="{{ profile.invoice_city }}">
+    </div>
+    <div class="field-group">
+      <label for="invoice_country">Kraj:</label>
+      <input type="text" name="invoice_country" id="invoice_country" value="{{ profile.invoice_country }}">
+    </div>
+  </div>
+</fieldset>
+
+
+  <!-- 🔐 Zmiana hasła -->
+  <p style="margin-top: 20px;">
+    <a href="{% url 'password_change' %}" class="cta-button dark small">Zmień hasło</a>
+  </p>
+
+  <!-- 💾 Zapisz -->
+  <button type="submit" class="cta-button" style="margin-top: 20px;">Zapisz dane</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'store/account_base.html' %}
+{% block account_content %}
+
+<h2>📂 Twoje pliki do pobrania</h2>
+
+{% if ready_items %}
+  <ul class="file-download-list">
+    {% for item in ready_items %}
+      <li>
+        <strong>{{ item.product.title }}</strong> –
+        <a href="{{ item.ready_file.url }}" download>Pobierz plik</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>Nie masz jeszcze żadnych plików do pobrania. Zrealizujemy Twoje zamówienie wkrótce 💛</p>
+{% endif %}
+
+{% endblock %}

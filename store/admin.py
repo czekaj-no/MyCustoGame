@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Order, OrderItem
+from .models import Product, Order, OrderItem, CustomForm, CustomFormField
 
 # Rejestracja prostych modeli
 @admin.register(Product)
@@ -12,6 +12,13 @@ admin.site.register(OrderItem)  # OrderItem sam w sobie
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
     extra = 0
+    fields = ['product', 'quantity', 'ready_file', 'get_customer']
+    readonly_fields = ['get_customer']
+
+    def get_customer(self, obj):
+        return f"{obj.order.name} ({obj.order.email})"
+
+    get_customer.short_description = "Klient"
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
@@ -20,4 +27,14 @@ class OrderAdmin(admin.ModelAdmin):
     search_fields = ['name', 'email']
     inlines = [OrderItemInline]
     list_editable = ['status', 'is_paid']
+
+class CustomFormFieldInline(admin.TabularInline):
+    model = CustomFormField
+    extra = 1
+
+@admin.register(CustomForm)
+class CustomFormAdmin(admin.ModelAdmin):
+    inlines = [CustomFormFieldInline]
+
+
 

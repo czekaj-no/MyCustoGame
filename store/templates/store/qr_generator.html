@@ -1,0 +1,66 @@
+{% extends 'store/account_base.html' %}
+{% block account_content %}
+
+<h2>📲 Generuj kody QR</h2>
+
+{% if messages %}
+  <div class="messages">
+    {% for message in messages %}
+      <div class="message {{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+
+{% for entry in items %}
+  <div class="qr-box">
+    <h3>{{ entry.item.product.title }}</h3>
+
+    {% if entry.qrs %}
+      <div class="existing-qrs">
+        <p><strong>Wygenerowane wcześniej:</strong></p>
+        {% for qr in entry.qrs %}
+          <div class="qr-preview">
+            <p><strong>Link:</strong> {{ qr.url }}</p>
+            <img src="{{ qr.image.url }}" width="200">
+            <a href="{{ qr.image.url }}" download class="cta-button small">⬇️ Pobierz kod</a>
+          </div>
+            {% if qr.selected_for_card %}
+              <p class="card-selected">✅ Wybrany do kartki</p>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if entry.remaining_slots > 0 %}
+      <p><strong>Dodaj kod QR (pozostało {{ entry.remaining_slots }}):</strong></p>
+      {% for i in "123"|make_list %}
+        {% if forloop.counter <= entry.remaining_slots %}
+          <form method="post" class="qr-form">
+            {% csrf_token %}
+            <input type="hidden" name="item_id" value="{{ entry.item.id }}">
+            <input type="url" name="url" placeholder="Wklej link (np. do Google Drive)" required>
+            {% if user_has_card %}
+  <label>
+    <input type="checkbox" name="selected_for_card">
+    Wybieram ten kod QR do kartki
+  </label>
+{% else %}
+  <label class="disabled-label">
+    <input type="checkbox" disabled>
+    Wybieram ten kod QR do kartki
+    <span class="warning-text">Aby wybrać, musisz najpierw zakupić kartkę</span>
+  </label>
+{% endif %}
+            <button type="submit">Generuj kod</button>
+          </form>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      <p>🟡 Limit 3 kodów QR dla tego produktu został osiągnięty.</p>
+    {% endif %}
+  </div>
+{% endfor %}
+
+{%endblock%}

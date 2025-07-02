@@ -1,0 +1,46 @@
+{% extends "store/account_base.html" %}
+{% block account_content %}
+
+<h2>Uzupełnij dane do personalizacji</h2>
+
+{% if customizations %}
+  <div class="firm-faq" style="margin-top: 30px;">
+
+    {% for item in customizations %}
+      <details {% if not item.sent %}open{% endif %}>
+        <summary>
+          <strong>{{ item.product.name }}</strong>
+          {% if item.sent %}
+            <span style="color: green; font-weight: bold;"> – dane wysłane ✅</span>
+          {% endif %}
+        </summary>
+
+        <div style="margin-top: 15px;">
+          {% if item.sent %}
+            <p><strong>Twoje dane zostały już wysłane i nie można ich edytować.</strong></p>
+            <div class="readonly-fields" style="background-color: #f3f3f3; padding: 15px; border-radius: 10px;">
+              {{ item.form.as_p }}
+            </div>
+          {% else %}
+            <form method="post" style="background-color: #f9f9f9; padding: 20px; border-radius: 12px;">
+              {% csrf_token %}
+              {{ item.form.as_p }}
+              <div class="cta-buttons">
+                <button type="submit" name="action" value="save-{{ item.id }}" class="cta-button dark">Zapisz jako robocze</button>
+                <button type="submit" name="action" value="send-{{ item.id }}" class="cta-button">Wyślij dane</button>
+              </div>
+            </form>
+          {% endif %}
+        </div>
+      </details>
+    {% endfor %}
+
+  </div>
+{% else %}
+  <div class="firm-cta" style="margin-top: 40px;">
+    <p><strong>Nie masz aktualnie żadnych produktów wymagających personalizacji.</strong></p>
+    <p>Gdy zakupisz produkt wymagający danych – pojawi się tutaj formularz do uzupełnienia.</p>
+  </div>
+{% endif %}
+
+{% endblock %}
