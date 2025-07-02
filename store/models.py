@@ -31,6 +31,7 @@ class CustomFormField(models.Model):
     field_type = models.CharField(max_length=20, choices=FIELD_TYPES)
 
 
+
 class Product(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(unique=True, blank=True, null=True)
@@ -73,9 +74,11 @@ class ProductImage(models.Model):
 class Order(models.Model):
     STATUS_CHOICES = [
         ('nowe', 'Nowe'),
+        ('w-trakcie','W trakcie realizacji'),
         ('zrealizowane', 'Zrealizowane'),
         ('anulowane', 'Anulowane'),
     ]
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='nowe')
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=150, blank=False, default="imię i nazwisko")
     email = models.EmailField(blank=False, default="email@example.com")
@@ -85,7 +88,6 @@ class Order(models.Model):
     city = models.CharField(max_length=100, blank=False, default="miasto")
     created = models.DateTimeField(auto_now_add=True)
     is_paid = models.BooleanField(default=False)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='nowe')
 
     def __str__(self):
         return f"Zamówienie #{self.id} - {self.name}"
@@ -145,3 +147,16 @@ class QRCode(models.Model):
 
     def __str__(self):
         return f"QR do {self.order_item.product.title} (ID {self.id})"
+
+
+class Customization(models.Model):
+    order_item = models.OneToOneField(OrderItem, on_delete=models.CASCADE, related_name='customization')
+    form = models.ForeignKey(CustomForm, on_delete=models.CASCADE)
+    sent = models.BooleanField(default=False)
+    data = models.JSONField(blank=True, null=True)  # <-- TU zapisujemy dane z formularza
+
+    # Możesz też dodać pole do przechowywania danych, jeśli nie masz customowych modeli odpowiedzi
+
+    def __str__(self):
+        return f"Personalizacja: {self.order_item}"
+

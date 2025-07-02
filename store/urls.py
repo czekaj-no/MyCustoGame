@@ -13,7 +13,7 @@ urlpatterns = [
     path('zamowienie/', views.checkout, name='checkout'),
     path('konto/zamowienia/', views.my_orders_view, name='my_orders'),
     path('konto/dane/', views.my_data_view, name='my_data'),
-    path('konto/personalizacja/', views.customization_view, name='customize'),
+    path('konto/personalizacja/', views.customization_view, name='customization'),
     path('konto/pliki/', views.downloads_view, name='downloads'),
     path('konto/kody/', views.qr_codes_view, name='qr_codes'),
     path('konto/oferty/', views.offers_view, name='offers'),
@@ -22,6 +22,7 @@ urlpatterns = [
     path('<slug:slug>/', views.product_detail, name='product_detail'),
     path('dodaj-do-koszyka/<slug:slug>/', views.add_to_cart, name='add_to_cart'),
     path('usun-z-koszyka/<slug:slug>/', views.remove_from_cart, name='remove_from_cart'),
+    path('account/add-extra/<int:item_id>/<str:addon_type>/', views.add_extra_view, name='add_extra'),
 
 ]
 

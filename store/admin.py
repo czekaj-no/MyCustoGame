@@ -1,10 +1,13 @@
 from django.contrib import admin
-from .models import Product, Order, OrderItem, CustomForm, CustomFormField
+from .models import Product, Order, OrderItem, CustomForm, CustomFormField, Customization
+
 
 # Rejestracja prostych modeli
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['title', 'category', 'price']  # możesz dodać więcej, jeśli chcesz
+    fields = ['title', 'category', 'price', 'downloadable_file', 'custom_form']
+
 
 admin.site.register(OrderItem)  # OrderItem sam w sobie
 
@@ -35,6 +38,11 @@ class CustomFormFieldInline(admin.TabularInline):
 @admin.register(CustomForm)
 class CustomFormAdmin(admin.ModelAdmin):
     inlines = [CustomFormFieldInline]
+
+@admin.register(Customization)
+class CustomizationAdmin(admin.ModelAdmin):
+    list_display = ['order_item', 'form', 'sent']
+    readonly_fields = ['form', 'order_item']
 
 
 

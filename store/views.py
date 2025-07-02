@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404, redirect
-from .models import Product, Order
+from .models import Product, Order, OrderItem, Profile, QRCode, Customization, CustomForm, CustomFormField
 from .cart import Cart
 from django.contrib import messages
 from django.views.decorators.http import require_POST
@@ -12,6 +12,10 @@ from django.contrib.admin.views.decorators import staff_member_required
 import qrcode
 from io import BytesIO
 from django.core.files.base import ContentFile
+from .forms import get_custom_form_for_product
+from django.db import models
+
+
 
 
 def product_list(request):
@@ -141,8 +145,8 @@ def playable_products(request):
 
 @login_required
 def my_orders_view(request):
-    # Na razie pusta lista testowa – zamówienia dodamy później z modeli
-    return render(request, 'store/my_orders.html')
+    orders = Order.objects.filter(user=request.user).prefetch_related('items__product')
+    return render(request, 'store/my_orders.html', {'orders': orders})
 
 
 
@@ -187,41 +191,73 @@ def my_data_view(request):
         'show_address_alert': show_address_alert,
     })
 
-
-
-
-
 @login_required
 def customization_view(request):
-    # Lista formularzy przypisanych do zamówień użytkownika
     customizations = []
 
-    for order in Order.objects.filter(user=request.user, status="waiting"):
-        form_obj = Customization.objects.get_or_create(order=order)[0]
-        # Tutaj podkładasz konkretny formularz, np. zdefiniowany osobno dla każdego produktu
-        form = get_custom_form_for_product(order.product, instance=form_obj)
-        customizations.append({
-            "product": order.product,
-            "form": form,
-            "id": form_obj.id,
-            "sent": form_obj.sent
-        })
+    for order in Order.objects.filter(user=request.user):
+        for item in order.items.all():
+            if not item.product.custom_form:
+                continue  # pomiń, jeśli produkt nie ma przypisanego formularza
 
-    if request.method == "POST":
-        for item in customizations:
-            form_id = item["id"]
-            if f"send-{form_id}" in request.POST or f"save-{form_id}" in request.POST:
-                form = get_custom_form_for_product(item["product"], request.POST, instance=form_obj)
+            customization, _ = Customization.objects.get_or_create(
+                order_item=item,
+                defaults={'form': item.product.custom_form}
+            )
+
+            # Sprawdź, czy to formularz, którego dotyczy POST
+            is_active = False
+            if request.method == "POST":
+                form_id = request.POST.get("form_id")
+                is_active = str(customization.id) == form_id
+
+            # Czy wymagamy pełnych danych?
+            require_all_fields = is_active and f"send-{form_id}" in request.POST
+
+            # Pobierz formularz
+            form = get_custom_form_for_product(
+                item.product,
+                instance=customization,
+                require_all_fields=require_all_fields
+            )
+
+            if is_active:
+                form = form.__class__(request.POST, request.FILES, instance=customization)
+
                 if form.is_valid():
-                    form.save()
+                    # Zapis danych do JSONField i pliku
+                    customization.data = {
+                        key: value for key, value in form.cleaned_data.items()
+                        if key not in ['sent'] and not hasattr(value, 'read')
+                    }
+
+                    # Plik – obsługa tylko 1 pliku na raz (możesz rozbudować)
+                    for key, value in form.cleaned_data.items():
+                        if hasattr(value, 'read'):
+                            customization.file_1 = value
+
                     if f"send-{form_id}" in request.POST:
-                        form_obj.sent = True
-                        form_obj.save()
-                return redirect("customize")  # reload po zapisie
+                        customization.sent = True
+                        messages.success(request, f"Dane dla produktu '{item.product.title}' zostały wysłane do realizacji.")
+                    elif f"save-{form_id}" in request.POST:
+                        messages.success(request, f"Dane dla produktu '{item.product.title}' zostały zapisane.")
+
+                    customization.save()
+                    return redirect('customization')
+
+            customizations.append({
+                "product": item.product,
+                "form": form,
+                "id": customization.id,
+                "sent": customization.sent,
+                "entry_instance": customization
+            })
 
     return render(request, "store/customization_form.html", {
         "customizations": customizations
     })
+
+
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
@@ -317,3 +353,12 @@ def generate_qr_image(url):
     qr.save(buffer)
     filename = "qr.png"
     return ContentFile(buffer.getvalue(), name=filename)
+
+
+@login_required
+def add_extra_view(request, item_id, addon_type):
+    return render(request, 'store/add_extra_placeholder.html', {
+        'item_id': item_id,
+        'addon_type': addon_type
+    })
+

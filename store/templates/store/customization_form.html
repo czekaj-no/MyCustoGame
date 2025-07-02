@@ -1,46 +1,60 @@
 {% extends "store/account_base.html" %}
 {% block account_content %}
 
-<h2>Uzupełnij dane do personalizacji</h2>
+<h2>📝 Personalizacja</h2>
 
 {% if customizations %}
-  <div class="firm-faq" style="margin-top: 30px;">
+  {% for entry in customizations %}
+    <div class="customization-block">
+      <h3>{{ entry.product.title }}</h3>
 
-    {% for item in customizations %}
-      <details {% if not item.sent %}open{% endif %}>
-        <summary>
-          <strong>{{ item.product.name }}</strong>
-          {% if item.sent %}
-            <span style="color: green; font-weight: bold;"> – dane wysłane ✅</span>
-          {% endif %}
-        </summary>
+      {% if entry.sent %}
+        <p>✅ Dane do personalizacji zostały już wysłane.</p>
 
-        <div style="margin-top: 15px;">
-          {% if item.sent %}
-            <p><strong>Twoje dane zostały już wysłane i nie można ich edytować.</strong></p>
-            <div class="readonly-fields" style="background-color: #f3f3f3; padding: 15px; border-radius: 10px;">
-              {{ item.form.as_p }}
-            </div>
-          {% else %}
-            <form method="post" style="background-color: #f9f9f9; padding: 20px; border-radius: 12px;">
-              {% csrf_token %}
-              {{ item.form.as_p }}
-              <div class="cta-buttons">
-                <button type="submit" name="action" value="save-{{ item.id }}" class="cta-button dark">Zapisz jako robocze</button>
-                <button type="submit" name="action" value="send-{{ item.id }}" class="cta-button">Wyślij dane</button>
-              </div>
-            </form>
-          {% endif %}
-        </div>
-      </details>
-    {% endfor %}
+        <!-- Wyświetl zapisane dane (po wysłaniu) -->
+        {% if entry.entry_instance.data %}
+          <ul>
+            {% for key, value in entry.entry_instance.data.items %}
+              <li><strong>{{ key }}:</strong> {{ value }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
 
-  </div>
+        {% if entry.entry_instance.file_1 %}
+          <p><strong>Załączony plik:</strong>
+            <a href="{{ entry.entry_instance.file_1.url }}" target="_blank">📎 Zobacz</a>
+          </p>
+        {% endif %}
+
+      {% else %}
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ entry.form.as_p }}
+          <input type="hidden" name="form_id" value="{{ entry.id }}">
+          <button type="submit" name="save-{{ entry.id }}" class="mini-btn">💾 Zapisz</button>
+          <button type="submit" name="send-{{ entry.id }}" class="mini-btn yellow">📤 Wyślij do realizacji</button>
+        </form>
+
+        <!-- Jeśli użytkownik już coś zapisał -->
+        {% if entry.entry_instance.data %}
+          <h4>📋 Zapisane dane:</h4>
+          <ul>
+            {% for key, value in entry.entry_instance.data.items %}
+              <li><strong>{{ key }}:</strong> {{ value }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        {% if entry.entry_instance.file_1 %}
+          <p><strong>Załączony plik:</strong>
+            <a href="{{ entry.entry_instance.file_1.url }}" target="_blank">📎 Zobacz</a>
+          </p>
+        {% endif %}
+      {% endif %}
+    </div>
+  {% endfor %}
 {% else %}
-  <div class="firm-cta" style="margin-top: 40px;">
-    <p><strong>Nie masz aktualnie żadnych produktów wymagających personalizacji.</strong></p>
-    <p>Gdy zakupisz produkt wymagający danych – pojawi się tutaj formularz do uzupełnienia.</p>
-  </div>
+  <p>Brak formularzy do wypełnienia.</p>
 {% endif %}
 
 {% endblock %}

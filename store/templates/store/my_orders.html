@@ -1,6 +1,117 @@
 {% extends "store/account_base.html" %}
-
 {% block account_content %}
-  <h2>Moje zamówienia</h2>
-  <p>Na razie testowo. Tu pojawią się Twoje zamówienia.</p>
+
+<h2>Moje zamówienia</h2>
+
+{% for order in orders %}
+  {% for item in order.items.all %}
+
+    <!-- Nagłówek zamówienia -->
+    <p class="order-header">
+      Zamówienie nr {{ order.id }} z dnia {{ order.created|date:"d.m.Y – H:i" }}
+    </p>
+
+    <!-- Blok jednego produktu -->
+    <div class="order-block">
+
+      <!-- Tytuł: Kategoria + Nazwa gry -->
+      <div class="order-title-row">
+        {{ item.product.category|capfirst }}: <strong>{{ item.product.title }}</strong>
+      </div>
+
+      <!-- Tabela dodatków -->
+      <table class="order-table">
+        <!-- Nagłówki dodatków -->
+        <tr>
+          <th>Wersja cyfrowa + QR</th>
+          <th>Kartka A4 z QR</th>
+          <th>Pendrive z grawerem</th>
+          <th>Płyta + opakowanie</th>
+        </tr>
+
+        <!-- Ikony (✅ / ❌) -->
+        <tr>
+          <td>✅</td>
+          <td>{% if item.includes_card %}✅{% else %}❌{% endif %}</td>
+          <td>{% if item.includes_pendrive %}✅{% else %}❌{% endif %}</td>
+          <td>{% if item.includes_cd %}✅{% else %}❌{% endif %}</td>
+        </tr>
+
+        <!-- Przyciski -->
+        <tr>
+          <td>
+            <a href="{% url 'qr_codes' %}" class="mini-btn yellow">Generuj kod</a>
+          </td>
+          <td>
+            {% if item.includes_card %}
+              <a href="{% url 'qr_codes' %}" class="mini-btn">Kod do kartki</a>
+            {% else %}
+              <a href="{% url 'add_extra' item.id 'card' %}" class="mini-btn orange">Dokup</a>
+            {% endif %}
+          </td>
+          <td>
+            {% if not item.includes_pendrive %}
+              <a href="{% url 'add_extra' item.id 'pendrive' %}" class="mini-btn orange">Dokup</a>
+            {% endif %}
+          </td>
+          <td>
+            {% if not item.includes_cd %}
+              <a href="{% url 'add_extra' item.id 'cd' %}" class="mini-btn orange">Dokup</a>
+            {% endif %}
+          </td>
+        </tr>
+      </table>
+
+<!-- Tabela: Status zamówienia -->
+<table class="order-table">
+  <tr class="gray-row">
+    <th colspan="3" style="text-align: center;">Status zamówienia</th>
+  </tr>
+  <tr>
+    <td style="text-align: left;">
+ {% if item.order.status == "anulowane" %}
+  🔴 Anulowane
+{% elif item.order.status == "zrealizowane" or item.ready_file %}
+  🟢 Zrealizowane
+{% elif item.order.status == "w-trakcie" or item.customization.sent and not item.ready_file %}
+  🔵 Realizujemy Twoje zamówienie
+{% else %}
+  🟡 Czekamy na Twoje dane
+{% endif %}
+
+    </td>
+
+  <td style="text-align: center;">
+ {% if item.order.status == "anulowane" %}
+  ❌ Zamówienie anulowane
+
+{% elif item.order.status == "zrealizowane" or item.ready_file %}
+  <a href="{{ item.ready_file.url }}" class="mini-btn">Pobierz plik</a>
+  <a href="{% url 'qr_codes' %}" class="mini-btn">Generuj kod</a>
+
+{% elif item.order.status == "w-trakcie" %}
+
+{% elif item.order.status == "nowe" %}
+  <a href="{% url 'customization' %}" class="mini-btn yellow">Dodaj dane do personalizacji</a>
+
+{% endif %}
+
+</td>
+
+
+    <td style="text-align: right;">
+      {% if item.tracking_number %}
+        Nr przesyłki: {{ item.tracking_number }}
+      {% else %}
+        Nr przesyłki:
+      {% endif %}
+    </td>
+  </tr>
+</table>
+
+    </div>
+
+  {% endfor %}
+{% endfor %}
+
 {% endblock %}

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.mail import send_mail
 from .forms import ContactForm
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -13,8 +14,9 @@ def nasze_gry (request):
 def personalizuj_gre (request):
     return render (request, 'personalizuj-gre.html')
 
-def moje_konto (request):
-    return render (request, 'moje-konto.html')
+@login_required
+def konto (request):
+    return render (request, 'konto.html')
 
 def b2b (request):
     return render (request, 'b2b.html')

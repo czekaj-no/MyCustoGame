@@ -26,7 +26,6 @@ urlpatterns = [
     path ('nasze-gry/', views.nasze_gry, name='nasze_gry'),
     path('umow-spotkanie/', views.b2b_meeting, name='b2b_meeting'),
     path ('kontakt/', views.kontakt, name='kontakt'),
-    path ('moje-konto/', views.moje_konto, name = 'moje-konto'),
     path ('dla-firm/', views.b2b, name = 'dla-firm'),
     path ('galeria/', views.galeria, name='galeria'),
     path('blog/', include('blog.urls')),
