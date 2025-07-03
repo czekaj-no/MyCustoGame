@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404, redirect
-from .models import Product, Order, OrderItem, Profile, QRCode, Customization, CustomForm, CustomFormField
+from .models import Product, Order, OrderItem, Profile, QRCode, Customization, CustomForm, CustomFormField,  CustomizationFile
 from .cart import Cart
 from django.contrib import messages
 from django.views.decorators.http import require_POST
@@ -225,24 +225,34 @@ def customization_view(request):
                 form = form.__class__(request.POST, request.FILES, instance=customization)
 
                 if form.is_valid():
-                    # Zapis danych do JSONField i pliku
+                    # 🧠 1. Dane tekstowe (wszystko poza plikami)
                     customization.data = {
                         key: value for key, value in form.cleaned_data.items()
-                        if key not in ['sent'] and not hasattr(value, 'read')
+                        if key not in form._custom_file_fields and not hasattr(value, 'read')
                     }
+                    customization.save()
 
-                    # Plik – obsługa tylko 1 pliku na raz (możesz rozbudować)
-                    for key, value in form.cleaned_data.items():
-                        if hasattr(value, 'read'):
-                            customization.file_1 = value
+                    # 🧹 2. Czyścimy stare pliki (opcjonalnie, jeśli nadpisujesz)
+                    customization.files.all().delete()
 
+                    # 💾 3. Zapisujemy pliki
+                    for field_name in form._custom_file_fields:
+                        file = form.cleaned_data.get(field_name)
+                        if file:
+                            CustomizationFile.objects.create(
+                                customization=customization,
+                                label=field_name,
+                                file=file
+                            )
+
+                    # 📨 4. Obsługa przycisków
                     if f"send-{form_id}" in request.POST:
                         customization.sent = True
-                        messages.success(request, f"Dane dla produktu '{item.product.title}' zostały wysłane do realizacji.")
+                        customization.save()
+                        messages.success(request,
+                                         f"Dane dla produktu '{item.product.title}' zostały wysłane do realizacji.")
                     elif f"save-{form_id}" in request.POST:
                         messages.success(request, f"Dane dla produktu '{item.product.title}' zostały zapisane.")
-
-                    customization.save()
                     return redirect('customization')
 
             customizations.append({

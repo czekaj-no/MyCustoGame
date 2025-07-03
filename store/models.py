@@ -155,8 +155,16 @@ class Customization(models.Model):
     sent = models.BooleanField(default=False)
     data = models.JSONField(blank=True, null=True)  # <-- TU zapisujemy dane z formularza
 
-    # Możesz też dodać pole do przechowywania danych, jeśli nie masz customowych modeli odpowiedzi
 
     def __str__(self):
         return f"Personalizacja: {self.order_item}"
+
+class CustomizationFile(models.Model):
+    customization = models.ForeignKey('Customization', on_delete=models.CASCADE, related_name='files')
+    label = models.CharField(max_length=255)  # np. "Zdjęcie babci"
+    file = models.FileField(upload_to='custom_files/')
+
+    def __str__(self):
+        return f"{self.label} ({self.customization})"
+
 

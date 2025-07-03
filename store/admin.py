@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Product, Order, OrderItem, CustomForm, CustomFormField, Customization
+from .models import Product, Order, OrderItem, CustomForm, CustomFormField, Customization, CustomizationFile
+from django.utils.html import format_html
+
 
 
 # Rejestracja prostych modeli
@@ -39,10 +41,22 @@ class CustomFormFieldInline(admin.TabularInline):
 class CustomFormAdmin(admin.ModelAdmin):
     inlines = [CustomFormFieldInline]
 
+class CustomizationFileInline(admin.TabularInline):
+    model = CustomizationFile
+    extra = 0
+
 @admin.register(Customization)
 class CustomizationAdmin(admin.ModelAdmin):
     list_display = ['order_item', 'form', 'sent']
     readonly_fields = ['form', 'order_item']
+    inlines = [CustomizationFileInline]
 
+
+    def file_1_link(self, obj):
+        if obj.file_1:
+            return format_html('<a href="{}" target="_blank">{}</a>', obj.file_1.url, obj.file_1.name)
+        return "—"
+
+    file_1_link.short_description = "Załączony plik"
 
 

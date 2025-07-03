@@ -35,6 +35,8 @@
           <button type="submit" name="send-{{ entry.id }}" class="mini-btn yellow">📤 Wyślij do realizacji</button>
         </form>
 
+
+
         <!-- Jeśli użytkownik już coś zapisał -->
         {% if entry.entry_instance.data %}
           <h4>📋 Zapisane dane:</h4>
@@ -45,11 +47,14 @@
           </ul>
         {% endif %}
 
-        {% if entry.entry_instance.file_1 %}
-          <p><strong>Załączony plik:</strong>
-            <a href="{{ entry.entry_instance.file_1.url }}" target="_blank">📎 Zobacz</a>
-          </p>
-        {% endif %}
+        {% if entry.entry_instance.files.all %}
+          <p><strong>Załączone pliki:</strong>
+
+   {% for file in entry.entry_instance.files.all %}
+  <p>📎 <a href="{{ file.file.url }}">{{ file.label }}</a></p>
+{% endfor %}
+
+{% endif %}
       {% endif %}
     </div>
   {% endfor %}
