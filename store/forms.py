@@ -65,7 +65,6 @@ def get_custom_form_for_product(product, instance=None, require_all_fields=False
                         label=field.label,
                         required=required,
                         widget=CustomClearableFileInput
-
                     )
                     self._custom_file_fields.append(field.label)
 

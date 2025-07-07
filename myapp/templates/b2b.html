@@ -36,7 +36,61 @@ Dla Firm
       </div>
     </div>
   </div>
+
 </section>
+
+
+<section class="carousel-section">
+  <h2>Zobacz nasze realizacje</h2>
+  <div class="carousel-container"> <!-- NIE ruszamy tej klasy -->
+    <div class="carousel-wrapper-with-arrows carousel"> <!-- TYLKO tu dodajemy .carousel -->
+      <button class="carousel-btn carousel-prev">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <div class="carousel-track-wrapper">
+        <div class="carousel-track">
+          <div class="carousel-item">
+            <h3>Gra na ślub przyjaciół</h3>
+            <img src="{% static 'img/plemnikator_3000_śmieszna_gra_personalizowana.png' %}" alt="Śmieszna gra personalizowana na ślub">
+          </div>
+          <div class="carousel-item">
+            <h3>Opowieść na walentynki</h3>
+            <img src="{% static 'img/100_powodow_dla_ktorych_cie_kocham_przyklad_personalizowane_audio.png' %}" alt="Personalizowane audio Sto powodów, dla których Cię kocham">
+          </div>
+          <div class="carousel-item">
+            <h3>Poradnik na 18 urodziny</h3>
+            <img src="{% static 'img/zabawny_personalizowany_prezent_poradnik_na_18_urodziny.png' %}" alt="Zabawny poradnik na 18 urodziny">
+          </div>
+          <div class="carousel-item">
+            <h3>Zaproszenia na wesele</h3>
+            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Komunikacja">
+          </div>
+          <div class="carousel-item">
+            <h3>Bajka dla chrześniaka</h3>
+            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Adopcja psów">
+          </div>
+          <div class="carousel-item">
+            <h3>Audiobook dla babci</h3>
+            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Podstawy treningu">
+          </div>
+          <div class="carousel-item">
+            <h3>Quiz dla przyszłego Taty</h3>
+            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Zaawansowany trening">
+          </div>
+          <div class="carousel-item">
+            <h3>Gra urodzinowa dla Ewy</h3>
+            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Warsztaty grupowe">
+          </div>
+        </div>
+      </div>
+      <button class="carousel-btn carousel-next">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+
 
 <section class="firm-wrapper">
   <div class="firm-intro">
@@ -75,18 +129,9 @@ Dla Firm
     </div>
   </div>
 
-  <div class="gallery-grid">
-    <a href="{% static 'img/cd.png' %}" class="glightbox" data-gallery="galeria">
-      <img src="{% static 'img/cd.png' %}" alt="Opis 1">
-    </a>
-    <a href="{% static 'img/PENDRIVE.png' %}" class="glightbox" data-gallery="galeria">
-      <img src="{% static 'img/PENDRIVE.png' %}" alt="Opis 2">
-    </a>
-        <a href="{% static 'img/to_wlasnie_ty.png' %}" class="glightbox" data-gallery="galeria">
-      <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Opis 2">
-    </a>
 
-      </div>
+
+
 
 <section class="business-intro-section">
   <div class="page-container">
@@ -112,7 +157,7 @@ Dla Firm
       <div class="firm-steps">
         <h2>Jak wygląda współpraca?</h2>
     <div class="step-boxes">
-      <div class="step-box"><span>1</span><p>Krótka rozmowa online lub telefoniczna – poznajemy Twoje potrzeby.
+      <div class="step-box"><span>1</span><p>Krótka rozmowa online lub w biurze – poznajemy Twoje potrzeby.
 </p>  <i class="fas fa-comments step-icon"></i>
 </div>
       <div class="step-box"><span>2</span><p>Przedstawiamy pomysł, zakres i cenę. Ustalamy szczegóły.</p><i class="fas fa-lightbulb step-icon"></i></div>
@@ -120,11 +165,131 @@ Dla Firm
       <div class="step-box"><span>4</span><p>Otrzymujesz gotowy produkt w wybranej liczbie i formie. Rewelacja!!!</p>  <i class="fas fa-trophy step-icon success-icon"></i>
 </div>
     </div>
+
+
          <div class="cta-buttons">
           <a href="/kontakt" class="cta-button">Skontaktuj się</a>
           <a href="/umow-spotkanie" class="cta-button">Umów spotkanie online</a>
         </div>
   </div>
+
+
+<section class="company-testimonials">
+  <h2>Zaufali nam</h2>
+  <div class="testimonial-grid">
+
+    <!-- Firma 1 -->
+    <div class="testimonial-card">
+      <img src="{% static 'img/logo_firmy1.png' %}" alt="Logo firmy 1" class="company-logo">
+      <p class="testimonial-text">
+        „To było coś zupełnie innego niż wszystkie dotychczasowe onboardingi. Nasi nowi pracownicy byli zachwyceni – i w końcu zapamiętali wszystko!”
+      </p>
+      <p class="testimonial-author">HR Manager, NovaTech</p>
+    </div>
+
+    <!-- Firma 2 -->
+    <div class="testimonial-card">
+      <img src="{% static 'img/logo_firmy2.png' %}" alt="Logo firmy 2" class="company-logo">
+      <p class="testimonial-text">
+        „Stworzyliście dla nas onboarding, o którym mówiła cała firma. Świetna produkcja, dowcip, klimat… i pełna automatyzacja!”
+      </p>
+      <p class="testimonial-author">Employer Branding Specialist, XYZ Corp</p>
+    </div>
+
+    <!-- Firma 3 -->
+    <div class="testimonial-card">
+      <img src="{% static 'img/logo_firmy3.png' %}" alt="Logo firmy 3" class="company-logo">
+      <p class="testimonial-text">
+        „Nie tylko zaoszczędziliśmy czas zespołu HR, ale też zrobiliśmy świetne pierwsze wrażenie. MyCustoGift robi robotę!”
+      </p>
+      <p class="testimonial-author">People Partner, FutureSpace</p>
+    </div>
+
+      <!-- Firma 4 -->
+    <div class="testimonial-card">
+      <img src="{% static 'img/logo_firmy3.png' %}" alt="Logo firmy 3" class="company-logo">
+      <p class="testimonial-text">
+        „Nie tylko zaoszczędziliśmy czas zespołu HR, ale też zrobiliśmy świetne pierwsze wrażenie. MyCustoGift robi robotę!”
+      </p>
+      <p class="testimonial-author">People Partner, FutureSpace</p>
+    </div>
+
+      <!-- Firma 5 -->
+    <div class="testimonial-card">
+      <img src="{% static 'img/logo_firmy3.png' %}" alt="Logo firmy 3" class="company-logo">
+      <p class="testimonial-text">
+        „Nie tylko zaoszczędziliśmy czas zespołu HR, ale też zrobiliśmy świetne pierwsze wrażenie. MyCustoGift robi robotę!”
+      </p>
+      <p class="testimonial-author">People Partner, FutureSpace</p>
+    </div>
+
+      <!-- Firma 6 -->
+    <div class="testimonial-card">
+      <img src="{% static 'img/logo_firmy3.png' %}" alt="Logo firmy 3" class="company-logo">
+      <p class="testimonial-text">
+        „Nie tylko zaoszczędziliśmy czas zespołu HR, ale też zrobiliśmy świetne pierwsze wrażenie. MyCustoGift robi robotę!”
+      </p>
+      <p class="testimonial-author">People Partner, FutureSpace</p>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="carousel-section">
+  <div class="carousel-container"> <!-- NIE ruszamy tej klasy -->
+    <div class="carousel-wrapper-with-arrows carousel"> <!-- TYLKO tu dodajemy .carousel -->
+      <button class="carousel-btn carousel-prev">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <div class="carousel-track-wrapper">
+        <div class="carousel-track">
+          <div class="carousel-item">
+            <h3>Gra na ślub przyjaciół</h3>
+            <img src="{% static 'img/plemnikator_3000_śmieszna_gra_personalizowana.png' %}" alt="Śmieszna gra personalizowana na ślub">
+          </div>
+          <div class="carousel-item">
+            <h3>Opowieść na walentynki</h3>
+            <img src="{% static 'img/100_powodow_dla_ktorych_cie_kocham_przyklad_personalizowane_audio.png' %}" alt="Personalizowane audio Sto powodów, dla których Cię kocham">
+          </div>
+          <div class="carousel-item">
+            <h3>Poradnik na 18 urodziny</h3>
+            <img src="{% static 'img/zabawny_personalizowany_prezent_poradnik_na_18_urodziny.png' %}" alt="Zabawny poradnik na 18 urodziny">
+          </div>
+          <div class="carousel-item">
+            <h3>Zaproszenia na wesele</h3>
+            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Komunikacja">
+          </div>
+          <div class="carousel-item">
+            <h3>Bajka dla chrześniaka</h3>
+            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Adopcja psów">
+          </div>
+          <div class="carousel-item">
+            <h3>Audiobook dla babci</h3>
+            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Podstawy treningu">
+          </div>
+          <div class="carousel-item">
+            <h3>Quiz dla przyszłego Taty</h3>
+            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Zaawansowany trening">
+          </div>
+          <div class="carousel-item">
+            <h3>Gra urodzinowa dla Ewy</h3>
+            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Warsztaty grupowe">
+          </div>
+        </div>
+      </div>
+      <button class="carousel-btn carousel-next">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+     <div class="cta-buttons">
+          <a href="/kontakt" class="cta-button">Skontaktuj się</a>
+          <a href="/umow-spotkanie" class="cta-button dark">Umów spotkanie online</a>
+        </div>
+</section>
+
+
 
 
 <div class="firm-faq">
