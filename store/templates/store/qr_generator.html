@@ -1,7 +1,8 @@
 {% extends 'store/account_base.html' %}
+{% load static %}
 {% block account_content %}
 
-<h2>📲 Generuj kody QR</h2>
+<h2>📲 Twoje kody QR</h2>
 
 {% if messages %}
   <div class="messages">
@@ -11,56 +12,46 @@
   </div>
 {% endif %}
 
-
 {% for entry in items %}
   <div class="qr-box">
-    <h3>{{ entry.item.product.title }}</h3>
+    <h3>{{ entry.item.product.category.name }} → <strong>{{ entry.item.product.title }}</strong></h3>
 
-    {% if entry.qrs %}
-      <div class="existing-qrs">
-        <p><strong>Wygenerowane wcześniej:</strong></p>
-        {% for qr in entry.qrs %}
-          <div class="qr-preview">
-            <p><strong>Link:</strong> {{ qr.url }}</p>
-            <img src="{{ qr.image.url }}" width="200">
-            <a href="{{ qr.image.url }}" download class="cta-button small">⬇️ Pobierz kod</a>
-          </div>
-            {% if qr.selected_for_card %}
-              <p class="card-selected">✅ Wybrany do kartki</p>
-            {% endif %}
-          </div>
-        {% endfor %}
-      </div>
-    {% endif %}
+    {% for qr in entry.qrs %}
+      <div class="qr-preview">
+        <h4>Sztuka {{ forloop.counter }}</h4>
 
-    {% if entry.remaining_slots > 0 %}
-      <p><strong>Dodaj kod QR (pozostało {{ entry.remaining_slots }}):</strong></p>
-      {% for i in "123"|make_list %}
-        {% if forloop.counter <= entry.remaining_slots %}
+        {% if qr.image %}
+          <img src="{{ qr.image.url }}" width="200" alt="Kod QR">
+          <br>
+          <a href="{{ qr.image.url }}" download class="cta-button small">⬇️ Pobierz kod</a>
+        {% else %}
+          <p class="qr-status qr-warning">⚠️ Wygenerujemy kod QR, gdy wkleisz i zatwierdzisz link.</p>
+        {% endif %}
+
+        {% if qr.url %}
+          <p><strong>Link docelowy:</strong> <a href="{{ qr.url }}" target="_blank">{{ qr.url }}</a></p>
+        {% else %}
+          <p class="qr-status">🔗 Przypisz i zatwierdź link.</p>
+        {% endif %}
+
+        {% if qr.url and qr.was_edited %}
+          <p class="qr-status">🔒 Link został już raz zmieniony – nie możesz go edytować ponownie.</p>
+        {% else %}
           <form method="post" class="qr-form">
             {% csrf_token %}
-            <input type="hidden" name="item_id" value="{{ entry.item.id }}">
-            <input type="url" name="url" placeholder="Wklej link (np. do Google Drive)" required>
-            {% if user_has_card %}
-  <label>
-    <input type="checkbox" name="selected_for_card">
-    Wybieram ten kod QR do kartki
-  </label>
-{% else %}
-  <label class="disabled-label">
-    <input type="checkbox" disabled>
-    Wybieram ten kod QR do kartki
-    <span class="warning-text">Aby wybrać, musisz najpierw zakupić kartkę</span>
-  </label>
-{% endif %}
-            <button type="submit">Generuj kod</button>
+            <input type="hidden" name="qr_id" value="{{ qr.id }}">
+            <input type="url"
+                   name="url"
+                   placeholder="{% if qr.url %}Wprowadź nowy link (możesz zmienić tylko raz){% else %}Wklej link (np. do Google Drive){% endif %}"
+                   required>
+            <button type="submit" class="cta-button">
+              {% if qr.url %}Zmień link{% else %}Zatwierdź link{% endif %}
+            </button>
           </form>
         {% endif %}
-      {% endfor %}
-    {% else %}
-      <p>🟡 Limit 3 kodów QR dla tego produktu został osiągnięty.</p>
-    {% endif %}
+      </div>
+    {% endfor %}
   </div>
 {% endfor %}
 
-{%endblock%}
+{% endblock %}

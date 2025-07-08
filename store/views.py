@@ -12,10 +12,19 @@ from django.contrib.admin.views.decorators import staff_member_required
 import qrcode
 from io import BytesIO
 from django.core.files.base import ContentFile
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from .forms import get_custom_form_for_product
 from django.db import models
+import uuid
 
+def generate_qr_image(url):
+    qr = qrcode.make(url)
+    buffer = BytesIO()
+    qr.save(buffer)
 
+    # 🆕 Unikalna nazwa pliku
+    filename = f"qr_{uuid.uuid4().hex[:10]}.png"
+    return ContentFile(buffer.getvalue(), name=filename)
 
 
 def product_list(request):
@@ -292,42 +301,45 @@ def qr_codes_view(request):
     order_items = OrderItem.objects.filter(order__user=request.user)
     context = {'items': []}
 
-    # Obsługa formularza
+    # 🔄 Tworzenie brakujących kodów QR dla każdej sztuki
+    for item in order_items:
+        existing_qrs = item.qr_codes.count()
+        quantity = item.quantity
+
+        for i in range(existing_qrs, quantity):
+            QRCode.objects.create(order_item=item)  # puste, bez linku
+
+    # 📨 Obsługa formularza
     if request.method == 'POST':
-        form = QRCodeForm(request.POST)
-        item_id = request.POST.get('item_id')
+        qr_id = request.POST.get('qr_id')
+        new_url = request.POST.get('url')
 
-        if form.is_valid() and item_id:
-            item = OrderItem.objects.get(id=item_id, order__user=request.user)
+        if qr_id and new_url:
+            qr = get_object_or_404(QRCode, id=qr_id, order_item__order__user=request.user)
 
-            wants_card = 'selected_for_card' in request.POST
-            user_has_card = OrderItem.objects.filter(
-                order__user=request.user,
-                product__title__icontains='kartka'
-            ).exists()
-
-            if wants_card and not user_has_card:
-                messages.error(request, "Aby wybrać kod QR do kartki, najpierw ją zakup.")
+            # Jeśli link już istniał i został edytowany, nie pozwalamy na kolejną zmianę
+            if qr.url and qr.was_edited:
+                messages.error(request, "Możesz zmienić link tylko raz.")
                 return redirect('qr_codes')
 
-            if item.qr_codes.count() >= 3:
-                messages.error(request, "Możesz wygenerować maksymalnie 3 kody QR dla jednego produktu.")
-                return redirect('qr_codes')
+            qr.url = new_url
+            qr.image = generate_qr_image(new_url)
+            qr.is_active = True
 
-            qr = form.save(commit=False)
-            qr.order_item = item
-            qr.image = generate_qr_image(qr.url)
+            # Jeśli to już drugi raz, oznacz jako edytowany
+            if qr.url and not qr.was_edited:
+                qr.was_edited = True
+
             qr.save()
-            messages.success(request, "Kod QR został wygenerowany!")
+            messages.success(request, "Link został przypisany do kodu QR.")
             return redirect('qr_codes')
 
-    # GET – pokaż formularze
+    # 📦 Przygotowanie danych do szablonu
     for item in order_items:
         qrs = item.qr_codes.all()
         context['items'].append({
             'item': item,
             'qrs': qrs,
-            'remaining_slots': 3 - qrs.count()
         })
 
     return render(request, 'store/qr_generator.html', context)
@@ -357,12 +369,8 @@ def offers_view(request):
         }
         return render(request, 'store/offers.html', context)
 
-def generate_qr_image(url):
-    qr = qrcode.make(url)
-    buffer = BytesIO()
-    qr.save(buffer)
-    filename = "qr.png"
-    return ContentFile(buffer.getvalue(), name=filename)
+
+
 
 
 @login_required

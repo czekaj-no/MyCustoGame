@@ -135,12 +135,16 @@ class Profile(models.Model):
     def __str__(self):
         return f"Profil: {self.user.username}"
 
+
 class QRCode(models.Model):
     order_item = models.ForeignKey('OrderItem', on_delete=models.CASCADE, related_name='qr_codes')
-    url = models.URLField(verbose_name="Link docelowy")
+    url = models.URLField(verbose_name="Link docelowy", blank=True, null=True)  # teraz opcjonalny
     image = models.ImageField(upload_to='qr_codes/', blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     selected_for_card = models.BooleanField(default=False)
+
+    is_active = models.BooleanField(default=False)
+    was_edited = models.BooleanField(default=False)
 
     def is_expired(self):
         return timezone.now() > self.created + timedelta(days=15)
