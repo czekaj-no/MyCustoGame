@@ -38,60 +38,55 @@ Personalizuj gre {% endblock %}
 
 
 <section class="carousel-section">
-  <h2>Zobacz przykłady</h2>
-  <div class="carousel-container"> <!-- NIE ruszamy tej klasy -->
-    <div class="carousel-wrapper-with-arrows carousel"> <!-- TYLKO tu dodajemy .carousel -->
-      <button class="carousel-btn carousel-prev">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <div class="carousel-track-wrapper">
-        <div class="carousel-track">
-          <div class="carousel-item">
-            <h3>Gra na ślub przyjaciół</h3>
-            <img src="{% static 'img/plemnikator_3000_śmieszna_gra_personalizowana.png' %}" alt="Śmieszna gra personalizowana na ślub">
-          </div>
-          <div class="carousel-item">
-            <h3>Opowieść na walentynki</h3>
-            <img src="{% static 'img/100_powodow_dla_ktorych_cie_kocham_przyklad_personalizowane_audio.png' %}" alt="Personalizowane audio Sto powodów, dla których Cię kocham">
-          </div>
-          <div class="carousel-item">
-            <h3>Poradnik na 18 urodziny</h3>
-            <img src="{% static 'img/zabawny_personalizowany_prezent_poradnik_na_18_urodziny.png' %}" alt="Zabawny poradnik na 18 urodziny">
-          </div>
-          <div class="carousel-item">
-            <h3>Astrologiczna opowieść</h3>
-            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Komunikacja">
-          </div>
-          <div class="carousel-item">
-            <h3>Bajka dla chrześniaka</h3>
-            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Adopcja psów">
-          </div>
-          <div class="carousel-item">
-            <h3>Audiobook dla babci</h3>
-            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Podstawy treningu">
-          </div>
-          <div class="carousel-item">
-            <h3>Quiz dla przyszłego Taty</h3>
-            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Zaawansowany trening">
-          </div>
-          <div class="carousel-item">
-            <h3>Gra urodzinowa dla Ewy</h3>
-            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Warsztaty grupowe">
-          </div>
+  <h2>Zobacz przykłady naszych produkcji:</h2>
+  <div class="carousel-container">
+<div class="carousel-wrapper-with-arrows">
+  <button class="carousel-btn carousel-prev"><i class="fas fa-chevron-left"></i></button>
+    <div class="carousel-track-wrapper">
+      <div class="carousel-track">
+        <div class="carousel-item">
+          <h3>Gra na ślub przyjacioł</h3>
+          <img src="{% static 'img/plemnikator_3000_śmieszna_gra_personalizowana.png' %}" alt="Śmieszna gra personalizowana na ślub">
+        </div>
+        <div class="carousel-item">
+          <h3>Opowieść na walentynki</h3>
+          <img src="{% static 'img/100_powodow_dla_ktorych_cie_kocham_przyklad_personalizowane_audio.png' %}" alt="Personalizowane audio Sto powodów, dla których Cię kocham">
+        </div>
+        <div class="carousel-item">
+          <h3>Poradnik na 18 urodziny</h3>
+          <img src="{% static 'img/zabawny_personalizowany_prezent_poradnik_na_18_urodziny.png' %}" alt="Zabawny poradnik na 18 urodziny">
+        </div>
+        <div class="carousel-item">
+          <h3>Zaproszenia na wesele</h3>
+          <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Komunikacja">
+        </div>
+        <div class="carousel-item">
+          <h3>Bajka dla chrześniaka</h3>
+          <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Adopcja psów">
+        </div>
+        <div class="carousel-item">
+          <h3>Audiobook dla babci</h3>
+          <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Podstawy treningu">
+        </div>
+        <div class="carousel-item">
+          <h3>Quiz dla przyszłego Taty</h3>
+          <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Zaawansowany trening">
+        </div>
+        <div class="carousel-item">
+          <h3>Gra urodzinowa dla Ewy</h3>
+          <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Warsztaty grupowe">
         </div>
       </div>
-      <button class="carousel-btn carousel-next">
-        <i class="fas fa-chevron-right"></i>
-      </button>
     </div>
+
+  <button class="carousel-btn carousel-next"><i class="fas fa-chevron-right"></i></button>
   </div>
 </section>
 
 
-
 <section class="firm-wrapper">
   <div class="firm-intro">
-    <h2>Dla kogo?</h2>
+    <h2>Dla kogo i na jaką okazję?</h2>
     <div class="firm-benefits-grid">
       <div class="benefit-box">
         <i class="fa-solid fa-heart"></i>
@@ -120,12 +115,29 @@ Personalizuj gre {% endblock %}
       </div>
       <div class="benefit-box">
         <i class="fa-solid fa-user-tie"></i>
-        <h4>Dla Firm i Zespołów</h4>
-        <p>Do onboardingu, integracji, rekrutacji lub jako wyjątkowy prezent firmowy lub zaproszenie na wydarzenie.</p>
-        <a href="/dla-firm" class="tile-link">➡️ Zobacz ofertę dla firm</a>
+        <h4>Szef, Nauczycielka czy Trener</h4>
+        <p>Zabawny lub symboliczny prezent – jako podziękowanie, pożegnanie lub forma uznania.</p>
       </div>
     </div>
   </div>
+
+
+  <section class="product-category">
+    <h2 class="section-title">Jak to działa?</h2>
+    <div class="step-boxes">
+     <div class="step-box"><span>1</span>Wybierasz produkt i finalizujesz zamówienie – na maila otrzymasz prostą instrukcję krok po kroku.</div>
+<div class="step-box"><span>2</span>W zakładce <strong>Moje Konto</strong> podajesz dane do personalizacji: imiona, zdjęcia, historie i inne szczegóły.</div>
+<div class="step-box"><span>3</span>My zajmujemy się resztą – tworzymy grę, quiz lub nagranie w wybranym stylu.</div>
+<div class="step-box"><span>4</span>Gotowy prezent trafia do Ciebie w 2–3 dni robocze – jako plik, kod QR, pendrive lub płyta z opakowaniem.</div>
+
+  </div>
+<div class="cta-buttons">
+        <a href="/nasze-gry" class="cta-button">Przeglądaj prezenty</a>
+        <a href="/sklep/zagraj" class="cta-button dark">Zagraj w nasze gry</a>
+      </div>
+      </div>
+
+</section>
 
 
 
@@ -136,297 +148,14 @@ Personalizuj gre {% endblock %}
     <div class="business-intro-wrapper">
       <ul class="firm-benefits-list two-columns">
          <li>🎂 Urodziny i święta</li>
-          <li>💕 Rocznice i walentynki</li>
-          <li>🍾 Wieczór panieński / kawalerski</li>
-          <li>✉️ Zaproszenia na ślub / wesele</li>
-
-          <li>💍 Zaręczyny i ślub</li>
-          <li>🍼 Narodziny dziecka / baby shower</li>
-          <li>👋 Awans / podziękowanie</li>
-          <li>🏆 Osiemnastki i jubileusze</li>
-
+          <li></i> 💕 Rocznice i Walentynki</li>
+          <li></i> 🍾 Wieczór panieński / kawalerski</li>
+          <li></i> 💍 Zaręczyny i Ślub</li>
+          <li></i> 🍼 Narodziny dziecka / baby shower</li>
+          <li></i> 👋 Awans, podziękowanie lub zaproszenie</li>
         </ul>
     </div>
-
-  <section class="product-category">
-    <h2 class="section-title">Jak to działa?</h2>
-    <div class="step-boxes">
-     <div class="step-box"><span>1</span>Wybierasz produkt i finalizujesz zamówienie – na maila otrzymasz prostą instrukcję krok po kroku.</div>
-<div class="step-box"><span>2</span>W zakładce <strong>Moje Konto</strong> podajesz dane do personalizacji: imiona, zdjęcia, datę urodzenia, historie i inne szczegóły.</div>
-<div class="step-box"><span>3</span>My zajmujemy się resztą – tworzymy grę, quiz lub nagranie w wybranym stylu.</div>
-<div class="step-box"><span>4</span>Gotowy prezent trafia do Ciebie w 2–3 dni robocze – jako plik, kod QR, pendrive lub płyta z opakowaniem.</div>
-
   </div>
-
-
-<div class="cta-buttons">
-        <a href="/nasze-gry" class="cta-button">Przeglądaj prezenty</a>
-        <a href="/sklep/zagraj" class="cta-button dark">Zagraj w nasze gry</a>
-      </div>
-
-</section>
-
-<section class="personalization-info">
-  <h2>Prosty i bezpieczny sposób personalizacji</h2>
-
-  <p>
-    Po zakupie otrzymasz dostęp do formularza w Moje Konto. Uzupełnienie go zajmie Ci kilka minut i jest banalnie proste.
-  </p>
-  <p>
-    Formularz jest w pełni bezpieczny – Twoje dane są chronione, a po realizacji zostaną na zawsze usunięte z systemu.
-  </p>
-  <p>
-    Każda gra, quiz czy nagranie audio to inne elementy personalizacji – np. imię bohatera, dedykacja, cel gry, zdjęcie i wiele, wiele innych.
-  </p>
-  <p>
-    Szczegóły personalizacji znajdziesz na stronie każdego produktu.
-Zobacz przykładowy fragment takiego formularza: </p>
-</section>
-
-<!-- FORMULARZ – pierwsza para kolumn -->
-<div class="mycg-grid">
-  <!-- Kolumna 1 -->
-  <div class="mycg-col">
-    <h4>Bohater 1</h4>
-
-    <label>Imię</label>
-    <input type="text" disabled placeholder="Ewa">
-
-    <label>Zdjęcie postaci</label>
-    <div class="fake-file-input">Wybierz plik</div>
-    <img src="{% static 'img/przykladowe_zdjecie_do_gry_personalizowanej.jpg' %}" alt="Bohater 1" class="preview-img">
-
-    <label>Okrzyk bojowy</label>
-    <textarea disabled rows="2" placeholder="Giń ziemniaku!"></textarea>
-  </div>
-
-  <!-- Kolumna 2 -->
-  <div class="mycg-col">
-    <h4>Bohater 2</h4>
-
-    <label>Imię</label>
-    <input type="text" disabled placeholder="Marek">
-
-    <label>Zdjęcie postaci</label>
-    <div class="fake-file-input">Wybierz plik</div>
-    <img src="{% static 'img/przykladowe_zdjecie_do_gry_personalizowanej2.jpg' %}" alt="Bohater 2" class="preview-img">
-
-    <label>Okrzyk bojowy</label>
-    <textarea disabled rows="2" placeholder="Twój czas dobiegł końca!"></textarea>
-  </div>
-</div>
-
-<!-- FORMULARZ – druga para kolumn -->
-<div class="mycg-grid" style="margin-top: 40px;">
-  <!-- Cel rozgrywki -->
-  <div class="mycg-col">
-    <h4>Cel rozgrywki</h4>
-    <label>O co walczą bohaterowie?</label>
-    <select disabled>
-      <option selected>Pilot do TV</option>
-      <option>Ostatni kawałek pizzy</option>
-      <option>Dostęp do Wi-Fi</option>
-      <option>Wieczne uwielbienie teściowej</option>
-      <option>Złoty medal w lenistwie</option>
-    </select>
-  </div>
-
-  <!-- Dedykacja -->
-  <div class="mycg-col">
-    <h4>Dedykacja</h4>
-    <label>Dedykacja do wklejenia w grze / audiobooku</label>
-    <textarea disabled rows="3" placeholder="Kochanej Ewie – za to, że jesteś najlepszą siostrą i jeszcze lepszym przeciwnikiem w grach!"></textarea>
-  </div>
-</div>
-
-
-
-
-
-
-<section class="carousel-section">
-  <div class="carousel-container"> <!-- NIE ruszamy tej klasy -->
-    <div class="carousel-wrapper-with-arrows carousel"> <!-- TYLKO tu dodajemy .carousel -->
-      <button class="carousel-btn carousel-prev">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <div class="carousel-track-wrapper">
-        <div class="carousel-track">
-          <div class="carousel-item">
-            <h3>Gra na ślub przyjaciół</h3>
-            <img src="{% static 'img/plemnikator_3000_śmieszna_gra_personalizowana.png' %}" alt="Śmieszna gra personalizowana na ślub">
-          </div>
-          <div class="carousel-item">
-            <h3>Opowieść na walentynki</h3>
-            <img src="{% static 'img/100_powodow_dla_ktorych_cie_kocham_przyklad_personalizowane_audio.png' %}" alt="Personalizowane audio Sto powodów, dla których Cię kocham">
-          </div>
-          <div class="carousel-item">
-            <h3>Poradnik na 18 urodziny</h3>
-            <img src="{% static 'img/zabawny_personalizowany_prezent_poradnik_na_18_urodziny.png' %}" alt="Zabawny poradnik na 18 urodziny">
-          </div>
-          <div class="carousel-item">
-            <h3>Zaproszenia na wesele</h3>
-            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Komunikacja">
-          </div>
-          <div class="carousel-item">
-            <h3>Bajka dla chrześniaka</h3>
-            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Adopcja psów">
-          </div>
-          <div class="carousel-item">
-            <h3>Audiobook dla babci</h3>
-            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Podstawy treningu">
-          </div>
-          <div class="carousel-item">
-            <h3>Quiz dla przyszłego Taty</h3>
-            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Zaawansowany trening">
-          </div>
-          <div class="carousel-item">
-            <h3>Gra urodzinowa dla Ewy</h3>
-            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Warsztaty grupowe">
-          </div>
-        </div>
-      </div>
-      <button class="carousel-btn carousel-next">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-    </div>
-  </div>
-</section>
-
-
-<section class="company-testimonials">
-  <h2>Co mówią nasi klienci?</h2>
-  <div class="testimonial-grid">
-
-    <div class="testimonial-card">
-      <p class="testimonial-text">
-        „To był najlepszy prezent, jaki kiedykolwiek wręczyłam! Personalizacja była idealnie dopasowana, a reakcja obdarowanej osoby – bezcenna.”
-      </p>
-      <p class="testimonial-author">Magda K., Kraków</p>
-    </div>
-
-    <div class="testimonial-card">
-      <p class="testimonial-text">
-        „Nie spodziewałem się, że coś tak śmiesznego i osobistego może być zrobione z taką dbałością. Polecam każdemu na prezent z efektem WOW.”
-      </p>
-      <p class="testimonial-author">Tomek R., Warszawa</p>
-    </div>
-
-    <div class="testimonial-card">
-      <p class="testimonial-text">
-        „Audiobook był wzruszający i zabawny jednocześnie. Moja mama się popłakała i zaśmiała w jednym odcinku. To był strzał w dziesiątkę.”
-      </p>
-      <p class="testimonial-author">Natalia J., Gdańsk</p>
-    </div>
-
-    <div class="testimonial-card">
-      <p class="testimonial-text">
-        „Audiobook był wzruszający i zabawny jednocześnie. Moja mama się popłakała i zaśmiała w jednym odcinku. To był strzał w dziesiątkę.”
-      </p>
-      <p class="testimonial-author">Natalia J., Gdańsk</p>
-    </div>
-
-    <div class="testimonial-card">
-      <p class="testimonial-text">
-        „Audiobook był wzruszający i zabawny jednocześnie. Moja mama się popłakała i zaśmiała w jednym odcinku. To był strzał w dziesiątkę.”
-      </p>
-      <p class="testimonial-author">Natalia J., Gdańsk</p>
-    </div>
-
-    <div class="testimonial-card">
-      <p class="testimonial-text">
-        „Audiobook był wzruszający i zabawny jednocześnie. Moja mama się popłakała i zaśmiała w jednym odcinku. To był strzał w dziesiątkę.”
-      </p>
-      <p class="testimonial-author">Natalia J., Gdańsk</p>
-    </div>
-
-    <div class="testimonial-card">
-      <p class="testimonial-text">
-        „Audiobook był wzruszający i zabawny jednocześnie. Moja mama się popłakała i zaśmiała w jednym odcinku. To był strzał w dziesiątkę.”
-      </p>
-      <p class="testimonial-author">Natalia J., Gdańsk</p>
-    </div>
-
-    <div class="testimonial-card">
-      <p class="testimonial-text">
-        „Audiobook był wzruszający i zabawny jednocześnie. Moja mama się popłakała i zaśmiała w jednym odcinku. To był strzał w dziesiątkę.”
-      </p>
-      <p class="testimonial-author">Natalia J., Gdańsk</p>
-    </div>
-
-  </div>
-</section>
-
-
-
-<div class="cta-buttons">
-        <a href="/nasze-gry" class="cta-button">Przeglądaj prezenty</a>
-        <a href="/sklep/zagraj" class="cta-button dark">Zagraj w nasze gry</a>
-      </div>
-      </div>
-
-</section>
-
-
-<div class="firm-faq">
-  <h2>Najczęściej zadawane pytania</h2>
-
-  <h3>🎨 O produkcie i współpracy</h3>
-  <details>
-    <summary>Czy tworzycie produkt od zera, czy na podstawie szablonu?</summary>
-    <p>Dla firm tworzymy każdy projekt od podstaw, dopasowany do celu, marki i odbiorców. Nie korzystamy z gotowych szablonów.</p>
-  </details>
-  <details>
-    <summary>Czy mogę wnieść własne pomysły, teksty lub branding?</summary>
-    <p>Oczywiście! Możesz przekazać nam swoje logo, kolory, hasła czy konkretne treści – wkomponujemy je w projekt.</p>
-  </details>
-  <details>
-    <summary>Jak wygląda proces współpracy krok po kroku?</summary>
-    <p>Najpierw krótko rozmawiamy online. Potem przedstawiamy koncepcję i wstępną wycenę. Po akceptacji przechodzimy do realizacji i wysyłamy gotowy produkt.</p>
-  </details>
-
-  <h3>🕓 Terminy i zamówienia</h3>
-  <details>
-    <summary>Ile trwa realizacja?</summary>
-    <p>Średnio od 5 do 10 dni roboczych, w zależności od stopnia skomplikowania. Dla pilnych projektów – działamy ekspresowo.</p>
-  </details>
-  <details>
-    <summary>Czy mogę zamówić tylko jedną grę lub quiz?</summary>
-    <p>Tak! Nawet jeden egzemplarz może być wyjątkowym prezentem – np. na awans, jubileusz lub pożegnanie pracownika.</p>
-  </details>
-
-  <h3>📦 Format i dostawa</h3>
-  <details>
-    <summary>Jak wygląda dostawa?</summary>
-    <p>Możesz otrzymać plik online (link lub QR), płytę CD/DVD z nadrukiem, pendrive z grawerem lub całe opakowanie prezentowe.</p>
-  </details>
-  <details>
-    <summary>Czy można udostępnić grę pracownikom np. na stronie firmowej?</summary>
-    <p>Tak, możemy przygotować wersję możliwą do umieszczenia na stronie www, wewnętrznym intranecie lub do pobrania przez link.</p>
-  </details>
-
-  <h3>💰 Koszty i formalności</h3>
-  <details>
-    <summary>Ile kosztuje projekt?</summary>
-    <p>Każdy projekt wyceniamy indywidualnie – zależnie od długości, liczby wersji i nośników. Wstępną wycenę otrzymasz po rozmowie.</p>
-  </details>
-  <details>
-    <summary>Czy wystawiacie faktury?</summary>
-    <p>Tak, wystawiamy faktury bez VAT (firma zwolniona z VAT). Dla instytucji publicznych możemy wystawić dokumenty z wymaganiami formalnymi.</p>
-  </details>
-
-  <h3>🔐 Bezpieczeństwo i pomoc</h3>
-  <details>
-    <summary>Czy mogę najpierw porozmawiać i omówić potrzeby?</summary>
-    <p>Jak najbardziej – zapraszamy na krótką rozmowę online. Chętnie doradzimy i wspólnie znajdziemy najlepszy pomysł.</p>
-  </details>
-  <details>
-    <summary>Czy moje dane i materiały są bezpieczne?</summary>
-    <p>Tak, traktujemy przekazane materiały z najwyższą poufnością. Możemy podpisać NDA, jeśli jest taka potrzeba.</p>
-  </details>
-</div>
-
-
 </section>
 
 
