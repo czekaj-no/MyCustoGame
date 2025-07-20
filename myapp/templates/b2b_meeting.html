@@ -30,17 +30,17 @@ Spotkanie dla Firm
     {% csrf_token %}
 
     <div class="form-group">
-      <label for="owner-name">Imię i nazwisko</label>
-      <input type="text" id="owner-name" name="owner_name" required>
+      <label for="name">Imię i nazwisko</label>
+      <input type="text" id="name" name="name" required>
     </div>
 
      <div class="form-group">
-      <label for="owner-name">Nazwa Firmy</label>
+      <label for="company-name">Nazwa Firmy</label>
       <input type="text" id="company-name" name="company-name" required>
     </div>
 
     <div class="form-group">
-      <label for="phone">NIP Firmy</label>
+      <label for="company-number">NIP Firmy</label>
       <input type="tel" id="company-number" name="company-number" required>
     </div>
 
@@ -55,8 +55,8 @@ Spotkanie dla Firm
     </div>
 
     <div class="form-group">
-      <label for="problem">Informacje na temat produktu/usługi, którymi jesteście Państwo zainteresowani</label>
-      <textarea id="problem" name="info" rows="10" required></textarea>
+      <label for="information">Informacje na temat produktu/usługi, którymi jesteście Państwo zainteresowani</label>
+      <textarea id="information" name="information" rows="10" required></textarea>
     </div>
 
     <button type="submit" class="cta-button">Umów spotkanie</button>
