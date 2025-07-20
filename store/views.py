@@ -16,13 +16,13 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 from .forms import get_custom_form_for_product
 from django.db import models
 import uuid
+from django.db.models import F
+
 
 def generate_qr_image(url):
     qr = qrcode.make(url)
     buffer = BytesIO()
     qr.save(buffer)
-
-    # 🆕 Unikalna nazwa pliku
     filename = f"qr_{uuid.uuid4().hex[:10]}.png"
     return ContentFile(buffer.getvalue(), name=filename)
 
@@ -301,15 +301,14 @@ def qr_codes_view(request):
     order_items = OrderItem.objects.filter(order__user=request.user)
     context = {'items': []}
 
-    # 🔄 Tworzenie brakujących kodów QR dla każdej sztuki
+    # 🔄 Automatyczne tworzenie QR dla każdej sztuki produktu
     for item in order_items:
-        existing_qrs = item.qr_codes.count()
         quantity = item.quantity
+        existing = item.qr_codes.count()
+        for _ in range(existing, quantity):
+            QRCode.objects.create(order_item=item)
 
-        for i in range(existing_qrs, quantity):
-            QRCode.objects.create(order_item=item)  # puste, bez linku
-
-    # 📨 Obsługa formularza
+    # 📤 Obsługa edycji linku
     if request.method == 'POST':
         qr_id = request.POST.get('qr_id')
         new_url = request.POST.get('url')
@@ -317,24 +316,16 @@ def qr_codes_view(request):
         if qr_id and new_url:
             qr = get_object_or_404(QRCode, id=qr_id, order_item__order__user=request.user)
 
-            # Jeśli link już istniał i został edytowany, nie pozwalamy na kolejną zmianę
-            if qr.url and qr.was_edited:
-                messages.error(request, "Możesz zmienić link tylko raz.")
-                return redirect('qr_codes')
-
+            # Zmieniamy link i obrazek
             qr.url = new_url
             qr.image = generate_qr_image(new_url)
             qr.is_active = True
-
-            # Jeśli to już drugi raz, oznacz jako edytowany
-            if qr.url and not qr.was_edited:
-                qr.was_edited = True
-
             qr.save()
+
             messages.success(request, "Link został przypisany do kodu QR.")
             return redirect('qr_codes')
 
-    # 📦 Przygotowanie danych do szablonu
+    # 📋 Dane do szablonu
     for item in order_items:
         qrs = item.qr_codes.all()
         context['items'].append({
@@ -343,7 +334,6 @@ def qr_codes_view(request):
         })
 
     return render(request, 'store/qr_generator.html', context)
-
 
 
 @login_required

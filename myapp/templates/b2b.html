@@ -14,15 +14,15 @@ Dla Firm
     <div class="business-intro-wrapper">
       <div class="business-text">
         <p>
-          Szukasz prezentu dla zespołu, klienta lub partnera biznesowego, który naprawdę zrobi wrażenie?<br>
-          <p>Tworzymy interaktywne gry, quizy, zaproszenia i audiobooki, które<b> budują relacje, wzmacniają wizerunek i wywołują emocje.</b></p>
+          Witasz nowych pracowników? Dziękujesz stałym klientom? A może organizujesz akcję marketingową? Z nami stworzysz coś naprawdę oryginalnego!<br>
+          <p>Oferujemy interaktywne gry, quizy, zaproszenia i audiobooki, które<b> budują relacje, wzmacniają wizerunek i wywołują emocje.</b></p>
         </p>
         <p>
           Każdy projekt powstaje od zera – zgodnie z Twoimi celami, brandingiem i odbiorcami.
         </p>
         <p>
          <p> Wyróżnij się czymś, czego nie da się kupić na półce – niech Cię zapamiętają!</p>
-         <p> Zadbamy o pomysł, realizację i dostarczenie gotowego prezentu w dowolnej formie i liczbie sztuk – link, kod QR, płyty CD/DVD w personalizowanych pudełkach lub pendrivy z grawerem.
+         <p> Zadbamy o pomysł, realizację i dostarczenie gotowego produktu w dowolnej formie i liczbie sztuk – <b>link, kod QR, personalizowane płyty CD/DVD w pudełkach lub personalizowane pendrivy w pudełkach</b>.
         </p>
 
         <div class="cta-buttons">
@@ -39,57 +39,10 @@ Dla Firm
 
 </section>
 
-
-<section class="carousel-section">
-  <h2>Zobacz nasze realizacje</h2>
-  <div class="carousel-container"> <!-- NIE ruszamy tej klasy -->
-    <div class="carousel-wrapper-with-arrows carousel"> <!-- TYLKO tu dodajemy .carousel -->
-      <button class="carousel-btn carousel-prev">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <div class="carousel-track-wrapper">
-        <div class="carousel-track">
-          <div class="carousel-item">
-            <h3>Gra na ślub przyjaciół</h3>
-            <img src="{% static 'img/plemnikator_3000_śmieszna_gra_personalizowana.png' %}" alt="Śmieszna gra personalizowana na ślub">
-          </div>
-          <div class="carousel-item">
-            <h3>Opowieść na walentynki</h3>
-            <img src="{% static 'img/100_powodow_dla_ktorych_cie_kocham_przyklad_personalizowane_audio.png' %}" alt="Personalizowane audio Sto powodów, dla których Cię kocham">
-          </div>
-          <div class="carousel-item">
-            <h3>Poradnik na 18 urodziny</h3>
-            <img src="{% static 'img/zabawny_personalizowany_prezent_poradnik_na_18_urodziny.png' %}" alt="Zabawny poradnik na 18 urodziny">
-          </div>
-          <div class="carousel-item">
-            <h3>Zaproszenia na wesele</h3>
-            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Komunikacja">
-          </div>
-          <div class="carousel-item">
-            <h3>Bajka dla chrześniaka</h3>
-            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Adopcja psów">
-          </div>
-          <div class="carousel-item">
-            <h3>Audiobook dla babci</h3>
-            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Podstawy treningu">
-          </div>
-          <div class="carousel-item">
-            <h3>Quiz dla przyszłego Taty</h3>
-            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Zaawansowany trening">
-          </div>
-          <div class="carousel-item">
-            <h3>Gra urodzinowa dla Ewy</h3>
-            <img src="{% static 'img/to_wlasnie_ty.png' %}" alt="Warsztaty grupowe">
-          </div>
-        </div>
-      </div>
-      <button class="carousel-btn carousel-next">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-    </div>
-  </div>
-</section>
-
+<video class="center-video" width="860" height="450" autoplay muted loop playsinline>
+    <source src="{% static 'przyklady.mp4' %}" type="video/mp4">
+    Twoja przeglądarka nie obsługuje tagu wideo.
+</video>
 
 
 <section class="firm-wrapper">
@@ -128,6 +81,25 @@ Dla Firm
       </div>
     </div>
   </div>
+
+  <div class="carousel-container">
+    <div class="carousel-images">
+      <h2>W jakiej formie?</h2>
+        <div class="carousel-item">
+            <h3>Pendrive w pudełku</h3>
+            <img src="{% static 'img/pendrive.png' %}" alt="Certyfikat 1">
+        </div>
+        <div class="carousel-item">
+            <h3>Płyta CD/DVD w pudełku</h3>
+            <img src="{% static 'img/cd.png' %}" alt="Certyfikat 2">
+        </div>
+        <div class="carousel-item">
+            <h3>Link lub Kod QR</h3>
+            <img src="{% static 'img/cd.png' %}" alt="Certyfikat 3">
+        </div>
+    </div>
+</div>
+
 
 
 

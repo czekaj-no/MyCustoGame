@@ -40,26 +40,14 @@
   <p><strong>W cenie otrzymujesz:</strong></p>
   <ul class="included-options">
     <li>✅ Plik cyfrowy do pobrania</li>
-    <li>✅ Generator kodu QR</li>
   </ul>
 
 <p><strong>Opcje dodatkowe:</strong></p>
 <ul class="extra-options">
   <li>
     <label>
-      <input type="checkbox" onchange="toggleQuantity(this, 'card')">
-      Kartka A4 z życzeniami i kodem QR (+29zł)
-    </label>
-    <div class="quantity-box" id="quantity-card">
-      <label>Ilość:</label>
-      <input type="number" min="1" value="1">
-      <p class="quantity-info">Każda kolejna kartka 30% taniej!</p>
-    </div>
-  </li>
-  <li>
-    <label>
       <input type="checkbox" onchange="toggleQuantity(this, 'cd')">
-      Płyta z nadrukiem w pudełku z nadrukiem (+49zł)
+      Personalizowana płyta + pudełko (+49zł)
     </label>
     <div class="quantity-box" id="quantity-cd">
       <label>Ilość:</label>
@@ -70,12 +58,23 @@
   <li>
     <label>
       <input type="checkbox" onchange="toggleQuantity(this, 'usb')">
-      Pendrive 1GB z grawerem (+59zł)
+      Personalizowany pendrive + pudełko(+59zł)
     </label>
     <div class="quantity-box" id="quantity-usb">
       <label>Ilość:</label>
       <input type="number" min="1" value="1">
       <p class="quantity-info">Każdy kolejny pendrive 30% taniej!</p>
+    </div>
+  </li>
+   <li>
+    <label>
+      <input type="checkbox" onchange="toggleQuantity(this, 'usb+cd')">
+      Zestaw: płyta + pendrive + pudełko (+79zł)
+    </label>
+    <div class="quantity-box" id="quantity-usb+cd">
+      <label>Ilość:</label>
+      <input type="number" min="1" value="1">
+      <p class="quantity-info">Każdy kolejny zestaw 30% taniej!</p>
     </div>
   </li>
 </ul>

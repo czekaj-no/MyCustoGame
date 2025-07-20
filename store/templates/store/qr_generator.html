@@ -25,30 +25,28 @@
           <br>
           <a href="{{ qr.image.url }}" download class="cta-button small">⬇️ Pobierz kod</a>
         {% else %}
-          <p class="qr-status qr-warning">⚠️ Wygenerujemy kod QR, gdy wkleisz i zatwierdzisz link.</p>
+          <p class="qr-status qr-warning">⚠️ Kod QR nie został jeszcze wygenerowany.</p>
         {% endif %}
 
         {% if qr.url %}
           <p><strong>Link docelowy:</strong> <a href="{{ qr.url }}" target="_blank">{{ qr.url }}</a></p>
+          <p class="qr-warning">⚠️ Uwaga: po zmianie linku, poprzedni kod QR przestanie działać.</p>
         {% else %}
-          <p class="qr-status">🔗 Przypisz i zatwierdź link.</p>
+          <p class="qr-status">🔗 Link nie został jeszcze przypisany.</p>
         {% endif %}
 
-        {% if qr.url and qr.was_edited %}
-          <p class="qr-status">🔒 Link został już raz zmieniony – nie możesz go edytować ponownie.</p>
-        {% else %}
-          <form method="post" class="qr-form">
-            {% csrf_token %}
-            <input type="hidden" name="qr_id" value="{{ qr.id }}">
-            <input type="url"
-                   name="url"
-                   placeholder="{% if qr.url %}Wprowadź nowy link (możesz zmienić tylko raz){% else %}Wklej link (np. do Google Drive){% endif %}"
-                   required>
-            <button type="submit" class="cta-button">
-              {% if qr.url %}Zmień link{% else %}Zatwierdź link{% endif %}
-            </button>
-          </form>
-        {% endif %}
+        <!-- Formularz zawsze dostępny -->
+        <form method="post" class="qr-form">
+          {% csrf_token %}
+          <input type="hidden" name="qr_id" value="{{ qr.id }}">
+          <input type="url"
+                 name="url"
+                 placeholder="{% if qr.url %}Wprowadź nowy link{% else %}Wklej link (np. do Google Drive){% endif %}"
+                 required>
+          <button type="submit" class="cta-button">
+            {% if qr.url %}Zmień link{% else %}Zatwierdź link{% endif %}
+          </button>
+        </form>
       </div>
     {% endfor %}
   </div>

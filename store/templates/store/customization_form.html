@@ -36,25 +36,6 @@
         </form>
 
 
-
-        <!-- Jeśli użytkownik już coś zapisał -->
-        {% if entry.entry_instance.data %}
-          <h4>📋 Zapisane dane:</h4>
-          <ul>
-            {% for key, value in entry.entry_instance.data.items %}
-              <li><strong>{{ key }}:</strong> {{ value }}</li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-
-        {% if entry.entry_instance.files.all %}
-          <p><strong>Załączone pliki:</strong>
-
-   {% for file in entry.entry_instance.files.all %}
-  <p>📎 <a href="{{ file.file.url }}">{{ file.label }}</a></p>
-{% endfor %}
-
-{% endif %}
       {% endif %}
     </div>
   {% endfor %}

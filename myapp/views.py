@@ -8,6 +8,12 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     return render(request, 'home.html')
 
+def store_regulations (request):
+    return render (request, 'store_regulations.html')
+
+def privacy_policy (request):
+    return render (request, 'privacy_policy.html')
+
 def nasze_gry (request):
     return render (request, 'nasze-gry.html')
 

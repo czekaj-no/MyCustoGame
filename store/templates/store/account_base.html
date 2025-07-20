@@ -24,20 +24,14 @@ Moje Konto
       </li>
       <li>
         <a href="{% url 'customization' %}"
-           class="{% if request.resolver_match.url_name == 'customize' %}active-link{% endif %}">
+           class="{% if request.resolver_match.url_name == 'customization' %}active-link{% endif %}">
            📝 Personalizacja
         </a>
       </li>
       <li>
         <a href="{% url 'downloads' %}"
            class="{% if request.resolver_match.url_name == 'downloads' %}active-link{% endif %}">
-           ⬇️ Pliki
-        </a>
-      </li>
-      <li>
-        <a href="{% url 'qr_codes' %}"
-           class="{% if request.resolver_match.url_name == 'qr_codes' %}active-link{% endif %}">
-           📲 Kod QR
+           ⬇️ Pliki do pobrania
         </a>
       </li>
       <li>
