@@ -1,10 +1,11 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404, redirect
 from .models import Product, Order, OrderItem, Profile, QRCode, Customization, CustomForm, CustomFormField,  CustomizationFile
 from .cart import Cart
 from django.contrib import messages
 from django.views.decorators.http import require_POST
 from .models import Order, OrderItem, Profile, QRCode
-from .forms import QRCodeForm
+from .forms import QRCodeForm, CustomAuthenticationForm, CustomUserCreationForm, LoginOrEmailAuthenticationForm
 from django.utils import timezone
 from datetime import timedelta, date
 from django.contrib.auth.decorators import login_required
@@ -17,6 +18,8 @@ from .forms import get_custom_form_for_product
 from django.db import models
 import uuid
 from django.db.models import F
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 
 def generate_qr_image(url):
@@ -157,7 +160,11 @@ def my_orders_view(request):
     orders = Order.objects.filter(user=request.user).prefetch_related('items__product')
     return render(request, 'store/my_orders.html', {'orders': orders})
 
-
+def account_redirect(request):
+    if request.user.is_authenticated:
+        return redirect('my_orders')
+    else:
+        return redirect('login')
 
 @login_required
 def my_data_view(request):
@@ -361,8 +368,6 @@ def offers_view(request):
 
 
 
-
-
 @login_required
 def add_extra_view(request, item_id, addon_type):
     return render(request, 'store/add_extra_placeholder.html', {
@@ -370,3 +375,40 @@ def add_extra_view(request, item_id, addon_type):
         'addon_type': addon_type
     })
 
+
+def custom_login_view(request):
+    if request.method == 'POST':
+        username_or_email = request.POST.get('username')
+        password = request.POST.get('password')
+
+        # próbujemy zalogować po nazwie użytkownika
+        user = authenticate(request, username=username_or_email, password=password)
+
+        if user is None:
+            # próbujemy znaleźć użytkownika po mailu
+            try:
+                user_obj = User.objects.get(email=username_or_email)
+                user = authenticate(request, username=user_obj.username, password=password)
+            except User.DoesNotExist:
+                user = None
+
+        if user is not None:
+            login(request, user)
+            return redirect('my_orders')
+        else:
+            messages.error(request, 'Nieprawidłowy login lub hasło.')
+
+    return render(request, 'store/login.html')
+
+
+
+def register_view(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('my_orders')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'store/register.html', {'form': form})

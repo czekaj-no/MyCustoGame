@@ -40,6 +40,14 @@ Moje Konto
            💝 Oferty
         </a>
       </li>
+      <li><form method="post" action="{% url 'logout' %}">
+  {% csrf_token %}
+  <button type="submit" class="sidebar-link logout-link">
+    <i class="fas fa-sign-out-alt"></i> Wyloguj się
+  </button>
+</form>
+
+      </li>
     </ul>
   </aside>
 

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="form-section">
+  <form method="post" action="{% url 'login' %}">
+    <h2>Zaloguj się</h2>
+    {% csrf_token %}
+
+    <label for="username">Login lub email *</label>
+    <input type="text" name="username" id="username" required value="{{ form.username.value|default:'' }}">
+    {% if form.username.errors %}
+      <div class="error">
+        {% for error in form.username.errors %}
+          <p>{{ error }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <label for="password">Hasło *</label>
+    <input type="password" name="password" id="password" required>
+    {% if form.password.errors %}
+      <div class="error">
+        {% for error in form.password.errors %}
+          <p>{{ error }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if form.non_field_errors %}
+      <div class="error">
+        {% for error in form.non_field_errors %}
+          <p>{{ error }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <button type="submit">Zaloguj się</button>
+
+    <p>Nie masz konta? <a href="{% url 'register' %}">Zarejestruj się</a></p>
+      <p><a href="{% url 'password_reset' %}">Nie pamiętasz hasła?</a></p>
+
+  </form>
+
+</section>
+{% endblock %}

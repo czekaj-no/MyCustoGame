@@ -4,6 +4,10 @@ from .models import Customization, CustomFormField, CustomForm
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.forms.widgets import ClearableFileInput
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+
 
 
 class CustomClearableFileInput(ClearableFileInput):
@@ -75,3 +79,55 @@ def get_custom_form_for_product(product, instance=None, require_all_fields=False
                             self.initial[field.label] = existing_file.file
 
     return DynamicForm(instance=instance)
+
+
+class LoginOrEmailAuthenticationForm(forms.Form):
+    username_or_email = forms.CharField(label='Login lub email')
+    password = forms.CharField(widget=forms.PasswordInput, label='Hasło')
+
+    def clean(self):
+        cleaned_data = super().clean()
+        username_or_email = cleaned_data.get('username_or_email')
+        password = cleaned_data.get('password')
+
+        # Spróbuj znaleźć użytkownika po loginie
+        try:
+            user = User.objects.get(username=username_or_email)
+        except User.DoesNotExist:
+            # Jeśli nie znaleziono, spróbuj po emailu
+            try:
+                user = User.objects.get(email=username_or_email)
+            except User.DoesNotExist:
+                user = None
+
+        if user:
+            authenticated_user = authenticate(username=user.username, password=password)
+            if authenticated_user:
+                self.user = authenticated_user
+                return cleaned_data
+
+        raise forms.ValidationError("Nieprawidłowy login/email lub hasło.")
+
+    def get_user(self):
+        return getattr(self, 'user', None)
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update({'id': 'id_username'})
+        self.fields['password'].widget.attrs.update({'id': 'id_password'})
+
+class CustomUserCreationForm(UserCreationForm):
+    email = forms.EmailField(required=True, label='Adres email')
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password1', 'password2')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update({'id': 'username'})
+        self.fields['email'].widget.attrs.update({'id': 'email'})
+        self.fields['password1'].widget.attrs.update({'id': 'password1'})
+        self.fields['password2'].widget.attrs.update({'id': 'password2'})
