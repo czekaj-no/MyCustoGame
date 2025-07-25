@@ -4,7 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{% block title %}MyCustoGame{% endblock %}</title>
+<title>{% block title %}MyCustoGift – personalizowane prezenty cyfrowe z duszą{% endblock %}</title>
+
+<meta name="description" content="{% block description %}Tworzymy cyfrowe i w pełni spersonalizowane prezenty: gry, quizy i najróżniejsze nagrania audio. Nasze prezenty bawią, wzruszają i zostają w pamięci na lata. {% endblock %}">
+
+<!-- Open Graph -->
+<meta property="og:title" content="{% block og_title %}MyCustoGift – personalizowane prezenty cyfrowe z duszą{% endblock %}">
+<meta property="og:description" content="{% block og_description %}Tworzymy cyfrowe i w pełni spersonalizowane prezenty: gry, quizy i najróżniejsze nagrania audio. Nasze prezenty bawią, wzruszają i zostają w pamięci na lata.{% endblock %}">
+<meta property="og:image" content="{% block og_image %}{{ STATIC_URL }}img/my_custo_gift_logo_footer.png{% endblock %}">
+
+
 
     <!-- Ładowanie pliku CSS -->
     {% load static %}

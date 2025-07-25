@@ -1,6 +1,27 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}
+    {{ product.name }} | MyCustoGift
+{% endblock %}
+
+{% block description %}
+    {{ product.short_description|default:"Zobacz wyjątkowy prezent stworzony na miarę!" }}
+{% endblock %}
+
+{% block og_title %}
+    {{ product.name }} | MyCustoGift
+{% endblock %}
+
+{% block og_description %}
+    {{ product.short_description|default:"Zobacz wyjątkowy prezent stworzony na miarę!" }}
+{% endblock %}
+
+{% block og_image %}
+    {{ product.image.url }}
+{% endblock %}
+
+
 {% block content %}
 <section class="product-detail">
   <div class="product-container">

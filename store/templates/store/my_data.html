@@ -1,4 +1,8 @@
 {% extends "store/account_base.html" %}
+
+{% block title %}Twoje dane | MyCustoGift{% endblock %}
+{% block description %}Zarządzaj swoimi danymi, edytuj informacje kontaktowe i miej kontrolę nad swoją prywatnością i kontem.{% endblock %}
+
 {% block account_content %}
 
 <h2>Moje dane</h2>
@@ -44,7 +48,7 @@
 
     <label>Kraj:</label>
     <select name="shipping_country">
-      <option value="Polska" {% if profile.shipping_country == "Polska" %}selected{% endif %}>Polska</option>
+      <option value="Polska" {% if profile.shipping_country == "Polska" %}selected{% endif %} >Polska</option>
       <option value="Inny">Inny</option>
     </select>
   </fieldset>

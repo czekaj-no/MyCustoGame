@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}Zaloguj się | Moje Konto w MyCustoGift{% endblock %}
+{% block description %}Zaloguj się, aby sprawdzić swoje zamówienia, formularze personalizacji lub kontynuować zakupy.{% endblock %}
+
+
 {% block content %}
 <section class="form-section">
   <form method="post" action="{% url 'login' %}">
