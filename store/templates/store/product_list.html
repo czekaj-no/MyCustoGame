@@ -22,7 +22,7 @@
 
 <section class="product-category">
   <h2>Nasze quizy</h2>
-  <div class="products-grid">
+  <div class="products-grid hideme">
     {% for product in quizy %}
       <div class="product-card">
         <img src="{{ product.image.url }}" alt="{{ product.title }}">
@@ -32,7 +32,12 @@
       </div>
     {% endfor %}
   </div>
+  <div class="coming-soon-box">
+    <h2>Już wkrótce!</h2>
+    <p>Pracujemy nad czymś interaktywnym, zabawnym i totalnie wystrzałowym. Zajrzyj do nas ponownie!</p>
+  </div>
 </section>
+
 
 <section class="product-category">
   <h2>Nasze audiobooki</h2>
@@ -50,7 +55,7 @@
 
 <section class="product-category">
   <h2>Nasze płyty muzyczne</h2>
-  <div class="products-grid">
+  <div class="products-grid hideme">
     {% for product in plyty %}
       <div class="product-card">
         <img src="{{ product.image.url }}" alt="{{ product.title }}">
@@ -60,5 +65,10 @@
       </div>
     {% endfor %}
   </div>
+    <div class="coming-soon-box">
+    <h2>Już wkrótce!</h2>
+    <p>Pracujemy nad czymś interaktywnym, zabawnym i totalnie wystrzałowym. Zajrzyj do nas ponownie!</p>
+  </div>
+</section>
 </section>
 {% endblock %}
